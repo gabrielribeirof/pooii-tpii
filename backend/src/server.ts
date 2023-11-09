@@ -1,5 +1,11 @@
-import express from 'express'
+import express from "express";
 
-const app = express()
+const app = express();
 
-app.listen(3000, () => console.log('Backend rodando em http://localhost:3000'))
+app.use("*", (_, response) =>
+	response.status(404).send({ message: "Not Found" }),
+);
+
+app.listen(3000, () => {
+	console.log("Backend rodando em http://localhost:3000");
+});

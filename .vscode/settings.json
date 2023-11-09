@@ -1,0 +1,13 @@
+{
+	"eslint.enable": true,
+	"eslint.codeActionsOnSave.mode": "all",
+	"[typescript][typescriptreact]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		}
+	},
+	"[json][jsonc][jsonl]": {
+		"editor.defaultFormatter": "vscode.json-language-features",
+		"editor.formatOnSave": true
+	}
+}

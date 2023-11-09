@@ -1,3 +1,9 @@
 {
-  "extends": "next/core-web-vitals"
+	"extends": [
+		"next/core-web-vitals",
+		"../.eslintrc.json"
+	],
+	"rules": {
+		"@typescript-eslint/explicit-function-return-type": "off"
+	}
 }
