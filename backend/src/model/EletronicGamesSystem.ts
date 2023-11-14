@@ -2,8 +2,8 @@ import { type User } from "./User";
 
 export class EletronicGamesSystem {
 	private _platformName: string;
-	private static readonly _clients: User[] = [];
-	private static readonly _managers: User[] = [];
+	private readonly _clients: User[] = [];
+	private readonly _managers: User[] = [];
 
 	constructor(platformName: string) {
 		this._platformName = platformName;
@@ -17,11 +17,11 @@ export class EletronicGamesSystem {
 		this._platformName = value;
 	}
 
-	static get clients(): User[] {
+	get clients(): User[] {
 		return this._clients;
 	}
 
-	static get managers(): User[] {
+	get managers(): User[] {
 		return this._managers;
 	}
 }
