@@ -1,5 +1,5 @@
 import { Game } from "./Game";
-
+import { type Developer } from "./Developer";
 export class Action extends Game {
 	_code: string;
 	_name: string;

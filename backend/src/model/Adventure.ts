@@ -1,5 +1,5 @@
 import { Game } from "./Game";
-
+import { type Developer } from "./Developer";
 export class Adventure extends Game {
 	_name: string;
 	_description: string;

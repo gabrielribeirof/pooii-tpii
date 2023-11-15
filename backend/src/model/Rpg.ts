@@ -1,5 +1,5 @@
 import { Game } from "./Game";
-
+import { type Developer } from "./Developer";
 export class Adventure extends Game {
 	_name: string;
 	_description: string;
@@ -11,8 +11,8 @@ export class Adventure extends Game {
 	_comment: string;
 	_avaliable: boolean;
 	_code: string;
-	private readonly valorJogo: number = 80;
-	private readonly taxaImposto: number = 5.5;
+	private readonly valorJogo: number = 50;
+	private readonly taxaImposto: number = 3.75;
 
 	constructor(
 		code: string,

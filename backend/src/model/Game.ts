@@ -1,3 +1,4 @@
+import { type Developer } from "./Developer";
 export abstract class Game {
 	protected _code: string;
 	protected _name: string;

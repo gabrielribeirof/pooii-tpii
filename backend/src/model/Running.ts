@@ -1,7 +1,6 @@
 import { Game } from "./Game";
 import { type Developer } from "./Developer";
-
-export class Sport extends Game {
+export class Running extends Game {
 	_name: string;
 	_description: string;
 	_developer: Developer;
@@ -12,8 +11,8 @@ export class Sport extends Game {
 	_comment: string;
 	_avaliable: boolean;
 	_code: string;
-	private readonly valorJogo: number = 40;
-	private readonly taxaImposto: number = 0.75;
+	private readonly valorJogo: number = 90;
+	private readonly taxaImposto: number = 7.25;
 
 	constructor(
 		code: string,
