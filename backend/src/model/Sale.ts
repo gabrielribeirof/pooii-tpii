@@ -1,4 +1,11 @@
+import { type Carrier } from "./Carrier";
 export class Sale {
+	// n consigo arrumar a função pra valor total ,
+	// calcularvalortotal
+	// calcular data de entrega
+	// public itemvenda additemvnda
+	// type pay= "card" | "boleto" | "pix";
+
 	protected _code: string;
 	protected _client: string;
 	protected _manager: string;
@@ -9,7 +16,7 @@ export class Sale {
 	protected _priceTotal: number;
 	protected _priceDiscount: number;
 	protected _pay: pay;
-	protected _Carriers: Carriers;
+	protected _Carrier: Carrier;
 
 	constructor(
 		code: string,
@@ -21,14 +28,14 @@ export class Sale {
 		priceTotal: number,
 		priceDiscount: number,
 		pay: pay,
-		Carriers: Carriers,
+		Carrier: Carrier,
 	) {
 		this._code = code;
 		this._client = client;
 		this._manager = manager;
 		this._dateSale = dateSale;
 		this._dateDelivery = dateDelivery;
-		this._Carriers = Carriers;
+		this._Carrier = Carrier;
 		this._pay = pay;
 		this._physicalProduct = physicalProduct;
 		this._priceDiscount = priceDiscount;
@@ -113,13 +120,5 @@ export class Sale {
 
 	set pay(value: pay) {
 		this._pay = value;
-	}
-
-	get dateSale(): Date {
-		return this._dateSale;
-	}
-
-	set dateSale(value: Date) {
-		this._dateSale = value;
 	}
 }
