@@ -19,7 +19,7 @@ export class Payment {
 		return this._receipt;
 	}
 
-	associateReceipt(receipt: Receipt): void {
+	public associateReceipt(receipt: Receipt): void {
 		this._receipt = receipt;
 	}
 
