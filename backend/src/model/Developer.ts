@@ -1,5 +1,5 @@
 export class Developer {
-	protected _code: string;
+	protected _code: number;
 	protected _cnpj: string;
 	protected _name: string;
 	protected _email: string;
@@ -8,7 +8,7 @@ export class Developer {
 	protected _adress: string;
 
 	constructor(
-		code: string,
+		code: number,
 		cnpj: string,
 		name: string,
 		email: string,

@@ -1,19 +1,19 @@
 export class Carrier {
-	protected _code: string;
+	protected _code: number;
 	protected _cnpj: string;
 	protected _name: string;
 	protected _email: string;
 	protected _phone: string;
-	protected _timeCarrier: string;
+	protected _timeCarrier: number;
 	protected _adress: string;
 
 	constructor(
-		code: string,
+		code: number,
 		cnpj: string,
 		name: string,
 		email: string,
 		phone: string,
-		timeCarrier: string,
+		timeCarrier: number,
 		adress: string,
 	) {
 		this._code = code;
@@ -65,11 +65,11 @@ export class Carrier {
 		this._phone = value;
 	}
 
-	get timeCarrier(): string {
+	get timeCarrier(): number {
 		return this._timeCarrier;
 	}
 
-	set timeCarrier(value: string) {
+	set timeCarrier(value: number) {
 		this._timeCarrier = value;
 	}
 

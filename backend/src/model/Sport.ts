@@ -1,27 +1,17 @@
 import { Game } from "./Game";
 import { type Developer } from "./Developer";
-
 export class Sport extends Game {
-	_name: string;
-	_description: string;
-	_developer: Developer;
-	_dateNew: Date;
-	_valor: string;
-	_exam: number;
-	_requirimentMin: string;
-	_comment: string;
-	_avaliable: boolean;
-	_code: string;
+
 	private readonly valorJogo: number = 40;
 	private readonly taxaImposto: number = 0.75;
 
 	constructor(
-		code: string,
+		code: number,
 		name: string,
 		description: string,
 		developer: Developer,
 		dateNew: Date,
-		valor: string,
+		price: number,
 		exam: number,
 		requirimentMin: string,
 		comment: string,
@@ -33,22 +23,12 @@ export class Sport extends Game {
 			description,
 			developer,
 			dateNew,
-			valor,
+			price,
 			exam,
 			requirimentMin,
 			comment,
 			avaliable,
 		);
-		this._code = code;
-		this._name = name;
-		this._description = description;
-		this._developer = developer;
-		this._dateNew = dateNew;
-		this._valor = valor;
-		this._exam = exam;
-		this._requirimentMin = requirimentMin;
-		this._comment = comment;
-		this._avaliable = avaliable;
 	}
 
 	public calculateValue(): number {

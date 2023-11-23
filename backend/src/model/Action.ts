@@ -1,18 +1,17 @@
 import { Game } from "./Game";
 import { type Developer } from "./Developer";
 export class Action extends Game {
-	_valor: string;
 
 	private readonly priceGame: number = 50;
 	private readonly taxRate: number = 2.25;
 
 	constructor(
-		code: string,
+		code: number,
 		name: string,
 		description: string,
 		developer: Developer,
 		dateNew: Date,
-		valor: string,
+		price: number,
 		exam: number,
 		requirimentMin: string,
 		comment: string,
@@ -24,22 +23,12 @@ export class Action extends Game {
 			description,
 			developer,
 			dateNew,
-			valor,
+			price,
 			exam,
 			requirimentMin,
 			comment,
 			avaliable,
 		);
-		this._code = code;
-		this._name = name;
-		this._description = description;
-		this._developer = developer;
-		this._dateNew = dateNew;
-		this._valor = valor;
-		this._exam = exam;
-		this._requirimentMin = requirimentMin;
-		this._comment = comment;
-		this._avaliable = avaliable;
 	}
 
 	public calculateValue(): number {

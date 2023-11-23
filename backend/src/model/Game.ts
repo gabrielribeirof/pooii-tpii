@@ -1,23 +1,23 @@
 import { type Developer } from "./Developer";
 export abstract class Game {
-	protected _code: string;
+	protected _code: number;
 	protected _name: string;
 	protected _description: string;
 	protected _developer: Developer;
 	protected _dateNew: Date;
-	protected _price: string;
+	protected _price: number;
 	protected _exam: number;
 	protected _requirimentMin: string;
 	protected _comment: string;
 	protected _avaliable: boolean;
 
 	constructor(
-		code: string,
+		code: number,
 		name: string,
 		description: string,
 		developer: Developer,
 		dateNew: Date,
-		price: string,
+		price: number,
 		exam: number,
 		requirimentMin: string,
 		comment: string,
@@ -35,11 +35,11 @@ export abstract class Game {
 		this._avaliable = avaliable;
 	}
 
-	get code(): string {
+	get code(): number {
 		return this._code;
 	}
 
-	set code(value: string) {
+	set code(value: number) {
 		this._code = value;
 	}
 
@@ -76,11 +76,11 @@ export abstract class Game {
 		this._dateNew = value;
 	}
 
-	get price(): string {
+	get price(): number {
 		return this._price;
 	}
 
-	set price(value: string) {
+	set price(value: number) {
 		this._price = value;
 	}
 

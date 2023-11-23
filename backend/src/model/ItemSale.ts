@@ -1,42 +1,39 @@
 export class ItemSale {
-	protected _price: string;
-	protected _quantity: string;
-	protected _codeProduct: string;
-	protected _isEpic: boolean;
+	protected _price: number;
+	protected _quantity: number;
+	protected _codeProduct: number;
 
 	constructor(
-		price: string,
-		quantity: string,
-		codeProduct: string,
-		isEpic: boolean,
+		price: number,
+		quantity: number,
+		codeProduct: number,
 	) {
 		this._price = price;
 		this._quantity = quantity;
 		this._codeProduct = codeProduct;
-		this._isEpic = isEpic;
 	}
 
 	get price(): number {
-		return parseFloat(this._price);
+		return this._price;
 	}
 
 	set price(value: number) {
-		this._price = value.toString();
+		this._price = value;
 	}
 
-	get quantity(): string {
+	get quantity(): number {
 		return this._quantity;
 	}
 
-	set quantity(value: string) {
+	set quantity(value: number) {
 		this._quantity = value;
 	}
 
-	get codeProduct(): string {
+	get codeProduct(): number {
 		return this._codeProduct;
 	}
 
-	set codeProduct(value: string) {
+	set codeProduct(value: number) {
 		this._codeProduct = value;
 	}
 
@@ -48,21 +45,7 @@ export class ItemSale {
 		return JSON.stringify(this);
 	}
 
-	get isEpic(): boolean {
-		return this._isEpic;
-	}
-
-	set isEpic(value: boolean) {
-		this._isEpic = value;
-	}
-
 	public calculateTotalPrice(): number {
-		const purchaseValue: number = this.price * parseFloat(this.quantity);
-		if (this.isEpic) {
-			const discount: number = purchaseValue * 0.05;
-			return purchaseValue - discount;
-		} else {
-			return purchaseValue;
-		}
+		return this._quantity * this._price;
 	}
 }
