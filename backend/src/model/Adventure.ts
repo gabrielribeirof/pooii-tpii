@@ -11,8 +11,8 @@ export class Adventure extends Game {
 	_comment: string;
 	_avaliable: boolean;
 	_code: string;
-	private readonly valorJogo: number = 80;
-	private readonly taxaImposto: number = 5.5;
+	private readonly priceGame: number = 80;
+	private readonly taxRate: number = 5.5;
 
 	constructor(
 		code: string,
