@@ -5,14 +5,14 @@ export class Running extends Game {
 	_description: string;
 	_developer: Developer;
 	_dateNew: Date;
-	_valor: string;
+	_price: string;
 	_exam: number;
 	_requirimentMin: string;
 	_comment: string;
 	_avaliable: boolean;
 	_code: string;
-	private readonly valorJogo: number = 90;
-	private readonly taxaImposto: number = 7.25;
+	private readonly priceGame: number = 90;
+	private readonly taxRate: number = 7.25;
 
 	constructor(
 		code: string,
@@ -20,7 +20,7 @@ export class Running extends Game {
 		description: string,
 		developer: Developer,
 		dateNew: Date,
-		valor: string,
+		price: string,
 		exam: number,
 		requirimentMin: string,
 		comment: string,
@@ -32,7 +32,7 @@ export class Running extends Game {
 			description,
 			developer,
 			dateNew,
-			valor,
+			price,
 			exam,
 			requirimentMin,
 			comment,
@@ -43,7 +43,7 @@ export class Running extends Game {
 		this._description = description;
 		this._developer = developer;
 		this._dateNew = dateNew;
-		this._valor = valor;
+		this._price = price;
 		this._exam = exam;
 		this._requirimentMin = requirimentMin;
 		this._comment = comment;
@@ -51,9 +51,9 @@ export class Running extends Game {
 	}
 
 	public calculateValue(): number {
-		const valorImposto: number = (this.taxaImposto / 100) * this.valorJogo;
-		const valorTotal: number = this.valorJogo + valorImposto;
-		return valorTotal;
+		const taxRate: number = (this.taxRate / 100) * this.priceGame;
+		const priceTotal: number = this.priceGame + taxRate;
+		return priceTotal;
 	}
 
 	public toString(): string {

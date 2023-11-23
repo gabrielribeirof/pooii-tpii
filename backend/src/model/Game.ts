@@ -5,7 +5,7 @@ export abstract class Game {
 	protected _description: string;
 	protected _developer: Developer;
 	protected _dateNew: Date;
-	protected _valor: string;
+	protected _price: string;
 	protected _exam: number;
 	protected _requirimentMin: string;
 	protected _comment: string;
@@ -17,7 +17,7 @@ export abstract class Game {
 		description: string,
 		developer: Developer,
 		dateNew: Date,
-		valor: string,
+		price: string,
 		exam: number,
 		requirimentMin: string,
 		comment: string,
@@ -28,7 +28,7 @@ export abstract class Game {
 		this._description = description;
 		this._developer = developer;
 		this._dateNew = dateNew;
-		this._valor = valor;
+		this._price = price;
 		this._exam = exam;
 		this._requirimentMin = requirimentMin;
 		this._comment = comment;
@@ -76,12 +76,12 @@ export abstract class Game {
 		this._dateNew = value;
 	}
 
-	get valor(): string {
-		return this._valor;
+	get price(): string {
+		return this._price;
 	}
 
-	set valor(value: string) {
-		this._valor = value;
+	set price(value: string) {
+		this._price = value;
 	}
 
 	get exam(): number {

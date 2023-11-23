@@ -1,18 +1,10 @@
 import { Game } from "./Game";
 import { type Developer } from "./Developer";
 export class Adventure extends Game {
-	_name: string;
-	_description: string;
-	_developer: Developer;
-	_dateNew: Date;
 	_valor: string;
-	_exam: number;
-	_requirimentMin: string;
-	_comment: string;
-	_avaliable: boolean;
-	_code: string;
-	private readonly valorJogo: number = 50;
-	private readonly taxaImposto: number = 3.75;
+
+	private readonly priceGame: number = 50;
+	private readonly taxRate: number = 3.75;
 
 	constructor(
 		code: string,
@@ -51,9 +43,9 @@ export class Adventure extends Game {
 	}
 
 	public calculateValue(): number {
-		const valorImposto: number = (this.taxaImposto / 100) * this.valorJogo;
-		const valorTotal: number = this.valorJogo + valorImposto;
-		return valorTotal;
+		const taxRate: number = (this.taxRate / 100) * this.priceGame;
+		const priceTotal: number = this.priceGame + taxRate;
+		return priceTotal;
 	}
 
 	public toString(): string {
