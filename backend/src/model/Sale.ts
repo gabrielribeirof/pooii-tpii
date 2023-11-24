@@ -1,4 +1,8 @@
 import { type Carrier } from "./Carrier";
+import { Client } from "./Client";
+import { SaleItem } from "./SaleItem";
+import { Manager } from "./Manager";
+import { Payment } from "./Payment";
 export class Sale {
 	// n consigo arrumar a função pra valor total ,
 	// calcularvalortotal
@@ -6,63 +10,64 @@ export class Sale {
 	// public itemvenda additemvnda
 	// type pay= "card" | "boleto" | "pix";
 
-	protected _code: string;
-	protected _client: string;
-	protected _manager: string;
+	protected _code: number;
+	protected _client: Client;
+	protected _manager: Manager;
 	protected _dateSale: Date;
 	protected _dateDelivery: Date;
-	// PPRIVATE ITENSVENDA: ARRAYLIST//
-	protected _physicalProduct: boolean;
-	protected _priceTotal: number;
+	protected _saleItens: Array<SaleItem>;
+	protected _hasPhysicalProduct: boolean;
+	protected _totalPrice: number;
 	protected _priceDiscount: number;
-	protected _pay: pay;
-	protected _Carrier: Carrier;
+	protected _payment: Payment;
+	protected _carrier: Carrier;
 
 	constructor(
-		code: string,
-		client: string,
-		manager: string,
+		code: number,
+		client: Client,
+		manager: Manager,
 		dateSale: Date,
 		dateDelivery: Date,
-		physicalProduct: boolean,
-		priceTotal: number,
+		hasPhysicalProduct: boolean,
+		totalPrice: number,
 		priceDiscount: number,
-		pay: pay,
-		Carrier: Carrier,
+		payment: Payment,
+		carrier: Carrier,
 	) {
 		this._code = code;
 		this._client = client;
 		this._manager = manager;
 		this._dateSale = dateSale;
 		this._dateDelivery = dateDelivery;
-		this._Carrier = Carrier;
-		this._pay = pay;
-		this._physicalProduct = physicalProduct;
+		this._carrier = carrier;
+		this._payment = payment;
+		this._hasPhysicalProduct = hasPhysicalProduct;
 		this._priceDiscount = priceDiscount;
-		this._priceTotal = priceTotal;
+		this._totalPrice = totalPrice;
+		this._saleItens = new Array<SaleItem>;
 	}
 
 	get code(): number {
-		return parseFloat(this._code);
+		return this._code;
 	}
 
 	set code(value: number) {
-		this._code = value.toString();
+		this._code = value;
 	}
 
-	get client(): string {
+	get client(): Client {
 		return this._client;
 	}
 
-	set client(value: string) {
+	set client(value: Client) {
 		this._client = value;
 	}
 
-	get manager(): string {
+	get manager(): Manager {
 		return this._manager;
 	}
 
-	set manager(value: string) {
+	set manager(value: Manager) {
 		this._manager = value;
 	}
 
@@ -91,19 +96,19 @@ export class Sale {
 	}
 
 	get physicalProduct(): boolean {
-		return this._physicalProduct;
+		return this._hasPhysicalProduct;
 	}
 
 	set physicalProduct(value: boolean) {
-		this._physicalProduct = value;
+		this._hasPhysicalProduct = value;
 	}
 
 	get priceTotal(): number {
-		return this._priceTotal;
+		return this._totalPrice;
 	}
 
 	set priceTotal(value: number) {
-		this._priceTotal = value;
+		this._totalPrice = value;
 	}
 
 	get priceDiscount(): number {
@@ -114,11 +119,15 @@ export class Sale {
 		this._priceDiscount = value;
 	}
 
-	get pay(): pay {
-		return this._pay;
+	get pay(): Payment {
+		return this._payment;
 	}
 
-	set pay(value: pay) {
-		this._pay = value;
+	set pay(value: Payment) {
+		this._payment = value;
+	}
+
+	public calculateTotalPrice(): number {
+		
 	}
 }

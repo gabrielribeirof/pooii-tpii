@@ -1,4 +1,4 @@
-export class ItemSale {
+export class SaleItem{
 	protected _price: number;
 	protected _quantity: number;
 	protected _codeProduct: number;
