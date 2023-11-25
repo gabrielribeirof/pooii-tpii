@@ -1,7 +1,7 @@
 export class SaleItem{
-	protected _price: number;
-	protected _quantity: number;
-	protected _codeProduct: number;
+	private _price: number;
+	private _quantity: number;
+	private _codeProduct: number;
 
 	constructor(
 		price: number,
@@ -38,10 +38,6 @@ export class SaleItem{
 	}
 
 	public toString(): string {
-		return JSON.stringify(this);
-	}
-
-	public toJSON(): string {
 		return JSON.stringify(this);
 	}
 

@@ -1,11 +1,11 @@
 export class Developer {
-	protected _code: number;
-	protected _cnpj: string;
-	protected _name: string;
-	protected _email: string;
-	protected _site: string;
-	protected _socialNetwork: string;
-	protected _adress: string;
+	private _code: number;
+	private _cnpj: string;
+	private _name: string;
+	private _email: string;
+	private _site: string;
+	private _socialNetwork: string;
+	private _adress: string;
 
 	constructor(
 		code: number,
@@ -82,10 +82,6 @@ export class Developer {
 	}
 
 	public toString(): string {
-		return JSON.stringify(this);
-	}
-
-	public toJSON(): string {
 		return JSON.stringify(this);
 	}
 }

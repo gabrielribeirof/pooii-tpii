@@ -1,9 +1,9 @@
 import { User } from "./User";
 
 export class Client extends User {
-	protected _registerDate: Date;
-	protected _level: number;
-	protected _isEpic: boolean;
+	private _registerDate: Date;
+	private _level: number;
+	private _isEpic: boolean;
 
 	constructor(
 		code: number,

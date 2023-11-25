@@ -3,16 +3,16 @@ import { Payment } from "./Payment";
 export class Receipt extends Payment {
 	private _number: string;
 
-	constructor(_codeNote: string) {
-		super(_codeNote);
-		this._number = generateRandomReceiptNumber();
+	constructor(codeNote: string) {
+		super(codeNote);
+		this._number = this.generateRandomReceiptNumber();
 	}
 
-	protected get number(): string {
+	get number(): string {
 		return this._number;
 	}
 
-	protected set number(value: string) {
+	set number(value: string) {
 		this._number = value;
 	}
 
@@ -20,17 +20,15 @@ export class Receipt extends Payment {
 		return JSON.stringify(this);
 	}
 
-	public toJSON(): string {
-		return JSON.stringify(this);
+	public generateRandomReceiptNumber(): string {
+		const minNumber = 1000;
+		const maxNumber = 9999;
+	
+		const randomNumber =
+			Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+	
+		return randomNumber.toString();
 	}
 }
 
-function generateRandomReceiptNumber(): string {
-	const minNumber = 1000;
-	const maxNumber = 9999;
 
-	const randomNumber =
-		Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-
-	return randomNumber.toString();
-}

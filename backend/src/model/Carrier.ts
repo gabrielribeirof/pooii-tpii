@@ -1,11 +1,11 @@
 export class Carrier {
-	protected _code: number;
-	protected _cnpj: string;
-	protected _name: string;
-	protected _email: string;
-	protected _phone: string;
-	protected _timeCarrier: number;
-	protected _adress: string;
+	private _code: number;
+	private _cnpj: string;
+	private _name: string;
+	private _email: string;
+	private _phone: string;
+	private _timeCarrier: number;
+	private _adress: string;
 
 	constructor(
 		code: number,
@@ -82,10 +82,6 @@ export class Carrier {
 	}
 
 	public toString(): string {
-		return JSON.stringify(this);
-	}
-
-	public toJSON(): string {
 		return JSON.stringify(this);
 	}
 }

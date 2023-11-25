@@ -3,34 +3,27 @@ import { Client } from "./Client";
 import { SaleItem } from "./SaleItem";
 import { Manager } from "./Manager";
 import { Payment } from "./Payment";
-export class Sale {
-	// n consigo arrumar a função pra valor total ,
-	// calcularvalortotal
-	// calcular data de entrega
-	// public itemvenda additemvnda
-	// type pay= "card" | "boleto" | "pix";
+import { Iterator } from "../util/Iterator";
 
-	protected _code: number;
-	protected _client: Client;
-	protected _manager: Manager;
-	protected _dateSale: Date;
-	protected _dateDelivery: Date;
-	protected _saleItens: Array<SaleItem>;
-	protected _hasPhysicalProduct: boolean;
-	protected _totalPrice: number;
-	protected _priceDiscount: number;
-	protected _payment: Payment;
-	protected _carrier: Carrier;
+export class Sale {
+	private _code: number;
+	private _client: Client;
+	private _manager: Manager;
+	private _dateSale: Date;
+	private _dateDelivery: Date;
+	private _saleItens: Array<SaleItem>;
+	private _hasPhysicalProduct: boolean;
+	private _totalPrice: number;
+	private _priceDiscount: number;
+	private _payment: Payment;
+	private _carrier: Carrier;
 
 	constructor(
 		code: number,
 		client: Client,
 		manager: Manager,
 		dateSale: Date,
-		dateDelivery: Date,
 		hasPhysicalProduct: boolean,
-		totalPrice: number,
-		priceDiscount: number,
 		payment: Payment,
 		carrier: Carrier,
 	) {
@@ -38,12 +31,13 @@ export class Sale {
 		this._client = client;
 		this._manager = manager;
 		this._dateSale = dateSale;
-		this._dateDelivery = dateDelivery;
+		this._dateDelivery = dateSale;
+		this.calculateDateDelivery();
 		this._carrier = carrier;
 		this._payment = payment;
 		this._hasPhysicalProduct = hasPhysicalProduct;
-		this._priceDiscount = priceDiscount;
-		this._totalPrice = totalPrice;
+		this._priceDiscount = 0;
+		this._totalPrice = this.calculateTotalPrice();
 		this._saleItens = new Array<SaleItem>;
 	}
 
@@ -69,14 +63,6 @@ export class Sale {
 
 	set manager(value: Manager) {
 		this._manager = value;
-	}
-
-	public toString(): string {
-		return JSON.stringify(this);
-	}
-
-	public toJSON(): string {
-		return JSON.stringify(this);
 	}
 
 	get dateDelivery(): Date {
@@ -127,7 +113,32 @@ export class Sale {
 		this._payment = value;
 	}
 
+	public toString(): string {
+		return JSON.stringify(this);
+	}
+
 	public calculateTotalPrice(): number {
-		
+		let it = new Iterator(this._saleItens);
+		let totalPrice = 0;
+		while(it.hasNext){
+			let item = it.next();
+			totalPrice += item.price;
+		}
+		if(this._client.isEpic){
+			this.priceDiscount = totalPrice;
+			return totalPrice - (totalPrice * 0.05);
+		}else{
+			return totalPrice;
+		}
+	}
+
+	public calculateDateDelivery(): void {
+		let dia = this._dateSale.getDay();
+		dia += this._carrier.timeCarrier;
+		this._dateDelivery.setDate(dia);
+	}
+
+	public addSaleItem(item: SaleItem): void {
+		this._saleItens.push(item);
 	}
 }

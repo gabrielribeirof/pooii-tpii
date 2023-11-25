@@ -1,9 +1,9 @@
 import { User } from "./User";
 
 export class Manager extends User {
-	protected _salary: number;
-	protected _pis: string;
-	protected _admissionDate: Date;
+	private _salary: number;
+	private _pis: string;
+	private _admissionDate: Date;
 
 	constructor(
 		code: number,

@@ -33,4 +33,13 @@ export class Iterator<T> {
     public rewind(): void {
         this.position = 0;
     }
+
+    // Verify if the array has next element.
+    public hasNext(): boolean {
+        if(this.position+1 == this.array.length){
+            return false;
+        }else{
+            return true;
+        }    
+    }
 }

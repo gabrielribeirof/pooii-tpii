@@ -1,9 +1,7 @@
 import { Game } from "./Game";
 import { type Developer } from "./Developer";
 export class Sport extends Game {
-
-	private readonly valorJogo: number = 40;
-	private readonly taxaImposto: number = 0.75;
+	private readonly taxRate: number = 0.0075;
 
 	constructor(
 		code: number,
@@ -32,9 +30,7 @@ export class Sport extends Game {
 	}
 
 	public calculateValue(): number {
-		const valorImposto: number = (this.taxaImposto / 100) * this.valorJogo;
-		const valorTotal: number = this.valorJogo + valorImposto;
-		return valorTotal;
+		return this.price + (this.price * this.taxRate);
 	}
 
 	public toString(): string {
@@ -43,9 +39,5 @@ export class Sport extends Game {
 
 	public static fromJSON(json: string): Game {
 		return JSON.parse(json);
-	}
-
-	public toJSON(): string {
-		return JSON.stringify(this);
 	}
 }

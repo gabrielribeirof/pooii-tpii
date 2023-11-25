@@ -1,46 +1,45 @@
 import { Payment } from "./Payment";
 
 export class Card extends Payment {
-	protected _flag: string;
-	protected _nome: string;
-	protected _number: number;
+	private _flag: string;
+	private _name: string;
+	private _number: number;
 
-	constructor(_codeNote: string, flag: string, _nome: string, _number: number) {
-		super(_codeNote);
+	constructor(codeNote: string, 
+		flag: string, 
+		name: string, 
+		number: number) {
+		super(codeNote);
 		this._flag = flag;
-		this._nome = _nome;
-		this._number = _number;
+		this._name = name;
+		this._number = number;
 	}
 
-	protected get flag(): string {
+	get flag(): string {
 		return this._flag;
 	}
 
-	protected set flag(value: string) {
+	set flag(value: string) {
 		this._flag = value;
 	}
 
-	protected get nome(): string {
-		return this._nome;
+	get nome(): string {
+		return this._name;
 	}
 
-	protected set nome(value: string) {
-		this._nome = value;
+	set nome(value: string) {
+		this._name = value;
 	}
 
-	protected get number(): string {
+	get number(): string {
 		return this.number;
 	}
 
-	protected set number(value: string) {
+	set number(value: string) {
 		this.number = value;
 	}
 
 	public toString(): string {
-		return JSON.stringify(this);
-	}
-
-	public toJSON(): string {
 		return JSON.stringify(this);
 	}
 }

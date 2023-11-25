@@ -1,19 +1,23 @@
 import { Payment } from "./Payment";
 
 export class Pix extends Payment {
-	protected _codPix: string;
+	private _pixCode: string;
 
-	constructor(_codeNote: string, codPix: string) {
-		super(_codeNote);
-		this._codPix = codPix;
+	constructor(codeNote: string, pixCode: string) {
+		super(codeNote);
+		this._pixCode = pixCode;
 	}
 
-	get codPix(): string {
-		return this._codPix;
+	get pixCode(): string {
+		return this._pixCode;
 	}
 
-	set codPix(value: string) {
-		this._codPix = value;
+	set pixCode(value: string) {
+		this._pixCode = value;
+	}
+
+	public toString(): string {
+		return JSON.stringify(this);
 	}
 
 	public generatePixCode(): string {

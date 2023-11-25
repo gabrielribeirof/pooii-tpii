@@ -59,7 +59,6 @@ export abstract class Game {
 		this._description = value;
 	}
 
-	// developer FAZER
 	get developer(): Developer {
 		return this._developer;
 	}
@@ -122,10 +121,6 @@ export abstract class Game {
 
 	public static fromJSON(json: string): Game {
 		return JSON.parse(json);
-	}
-
-	public toJSON(): string {
-		return JSON.stringify(this);
 	}
 
 	public abstract calculateValue(): number;
