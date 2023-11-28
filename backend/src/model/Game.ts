@@ -1,4 +1,5 @@
 import { type Developer } from "./Developer";
+
 export abstract class Game {
 	protected _code: number;
 	protected _name: string;

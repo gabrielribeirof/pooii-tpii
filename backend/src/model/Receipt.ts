@@ -23,12 +23,10 @@ export class Receipt extends Payment {
 	public generateRandomReceiptNumber(): string {
 		const minNumber = 1000;
 		const maxNumber = 9999;
-	
+
 		const randomNumber =
 			Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-	
+
 		return randomNumber.toString();
 	}
 }
-
-

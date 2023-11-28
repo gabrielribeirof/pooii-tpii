@@ -1,13 +1,9 @@
-export class SaleItem{
+export class SaleItem {
 	private _price: number;
 	private _quantity: number;
 	private _codeProduct: number;
 
-	constructor(
-		price: number,
-		quantity: number,
-		codeProduct: number,
-	) {
+	constructor(price: number, quantity: number, codeProduct: number) {
 		this._price = price;
 		this._quantity = quantity;
 		this._codeProduct = codeProduct;

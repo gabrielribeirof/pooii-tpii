@@ -1,36 +1,10 @@
 import { Game } from "./Game";
-import { type Developer } from "./Developer";
+
 export class Sport extends Game {
 	private readonly taxRate: number = 0.0075;
 
-	constructor(
-		code: number,
-		name: string,
-		description: string,
-		developer: Developer,
-		dateNew: Date,
-		price: number,
-		exam: number,
-		requirimentMin: string,
-		comment: string,
-		avaliable: boolean,
-	) {
-		super(
-			code,
-			name,
-			description,
-			developer,
-			dateNew,
-			price,
-			exam,
-			requirimentMin,
-			comment,
-			avaliable,
-		);
-	}
-
 	public calculateValue(): number {
-		return this.price + (this.price * this.taxRate);
+		return this.price + this.price * this.taxRate;
 	}
 
 	public toString(): string {

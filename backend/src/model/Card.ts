@@ -3,12 +3,9 @@ import { Payment } from "./Payment";
 export class Card extends Payment {
 	private _flag: string;
 	private _name: string;
-	private _number: number;
+	private readonly _number: number;
 
-	constructor(codeNote: string, 
-		flag: string, 
-		name: string, 
-		number: number) {
+	constructor(codeNote: string, flag: string, name: string, number: number) {
 		super(codeNote);
 		this._flag = flag;
 		this._name = name;

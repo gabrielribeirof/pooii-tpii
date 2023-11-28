@@ -17,7 +17,7 @@ export class UserController {
 			email,
 			registerDate,
 			level,
-			isEpic
+			isEpic,
 		} = request.body;
 
 		const client = new Client(
@@ -31,12 +31,10 @@ export class UserController {
 			email,
 			registerDate,
 			level,
-			isEpic
-		)
-
-		EletronicGamesSystem.clients.push(
-			client
+			isEpic,
 		);
+
+		EletronicGamesSystem.clients.push(client);
 
 		response.status(201).send(client);
 	}
@@ -56,22 +54,22 @@ export class UserController {
 			admissionDate,
 		} = request.body;
 
-		EletronicGamesSystem.managers.push(
-			new Manager(
-				code,
-				name,
-				cpf,
-				rg,
-				birth,
-				address,
-				zipcode,
-				email,
-				salary,
-				pis,
-				admissionDate,
-			),
+		const manager = new Manager(
+			code,
+			name,
+			cpf,
+			rg,
+			birth,
+			address,
+			zipcode,
+			email,
+			salary,
+			pis,
+			admissionDate,
 		);
 
-		response.status(201).send();
+		EletronicGamesSystem.managers.push(manager);
+
+		response.status(201).send(manager);
 	}
 }

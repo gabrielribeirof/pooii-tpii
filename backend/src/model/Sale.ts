@@ -1,9 +1,10 @@
-import { type Carrier } from "./Carrier";
-import { Client } from "./Client";
-import { SaleItem } from "./SaleItem";
-import { Manager } from "./Manager";
-import { Payment } from "./Payment";
 import { Iterator } from "../util/Iterator";
+
+import { type Carrier } from "./Carrier";
+import { type Client } from "./Client";
+import { type SaleItem } from "./SaleItem";
+import { type Manager } from "./Manager";
+import { type Payment } from "./Payment";
 
 export class Sale {
 	private _code: number;
@@ -11,12 +12,12 @@ export class Sale {
 	private _manager: Manager;
 	private _dateSale: Date;
 	private _dateDelivery: Date;
-	private _saleItens: Array<SaleItem>;
+	private readonly _saleItens: SaleItem[];
 	private _hasPhysicalProduct: boolean;
 	private _totalPrice: number;
 	private _priceDiscount: number;
 	private _payment: Payment;
-	private _carrier: Carrier;
+	private readonly _carrier: Carrier;
 
 	constructor(
 		code: number,
@@ -38,7 +39,7 @@ export class Sale {
 		this._hasPhysicalProduct = hasPhysicalProduct;
 		this._priceDiscount = 0;
 		this._totalPrice = this.calculateTotalPrice();
-		this._saleItens = new Array<SaleItem>;
+		this._saleItens = new Array<SaleItem>();
 	}
 
 	get code(): number {
@@ -118,22 +119,22 @@ export class Sale {
 	}
 
 	public calculateTotalPrice(): number {
-		let it = new Iterator(this._saleItens);
+		const it = new Iterator(this._saleItens);
 		let totalPrice = 0;
-		while(it.hasNext){
-			let item = it.next();
+		while (it.hasNext) {
+			const item = it.next();
 			totalPrice += item.price;
 		}
-		if(this._client.isEpic){
+		if (this._client.isEpic) {
 			this.priceDiscount = totalPrice;
-			return totalPrice - (totalPrice * 0.05);
-		}else{
+			return totalPrice - totalPrice * 0.05;
+		} else {
 			return totalPrice;
 		}
 	}
 
 	public calculateDateDelivery(): void {
-		if(this._hasPhysicalProduct){
+		if (this._hasPhysicalProduct) {
 			let dia = this._dateSale.getDay();
 			dia += this._carrier.timeCarrier;
 			this._dateDelivery.setDate(dia);

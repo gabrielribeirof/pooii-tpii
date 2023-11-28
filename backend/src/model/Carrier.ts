@@ -1,11 +1,11 @@
 export class Carrier {
-	private _code: number;
+	private readonly _code: number;
 	private _cnpj: string;
 	private _name: string;
 	private _email: string;
 	private _phone: string;
 	private _timeCarrier: number;
-	private _adress: string;
+	private readonly _adress: string;
 
 	constructor(
 		code: number,
