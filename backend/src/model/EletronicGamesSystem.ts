@@ -7,77 +7,77 @@ import { Sale } from "./Sale";
 import { type User } from "./User";
 
 export class EletronicGamesSystem {
-	private _platformName: string;
-	private _sales: Array<Sale>;
-	private _games: Array<Game>;
-	private _developers: Array<Developer>;
-	private _carriers: Array<Carrier>;
-	private _clients: Array<Client>;
-	private _managers: Array<Manager>;
+	private static _platformName: string;
+	private static _sales: Array<Sale>;
+	private static _games: Array<Game>;
+	private static _developers: Array<Developer>;
+	private static _carriers: Array<Carrier>;
+	private static _clients: Array<Client>;
+	private static _managers: Array<Manager>;
 
 	constructor(platformName: string) {
-		this._platformName = platformName;
-		this._sales = new Array<Sale>;
-		this._games = new Array<Game>;
-		this._developers = new Array<Developer>;
-		this._carriers = new Array<Carrier>;
-		this._clients = new Array<Client>;
-		this._managers = new Array<Manager>;
+		EletronicGamesSystem._platformName = platformName;
+		EletronicGamesSystem._sales = new Array<Sale>;
+		EletronicGamesSystem._games = new Array<Game>;
+		EletronicGamesSystem._developers = new Array<Developer>;
+		EletronicGamesSystem._carriers = new Array<Carrier>;
+		EletronicGamesSystem._clients = new Array<Client>;
+		EletronicGamesSystem._managers = new Array<Manager>;
 	}
 
-	get platformName(): string {
+	static get platformName(): string {
 		return this._platformName;
 	}
 
-	set platformName(value: string) {
+	static set platformName(value: string) {
 		this._platformName = value;
 	}
 
-	get sales(): Array<Sale> {
+	static get sales(): Array<Sale> {
 		return this._sales;
 	}
 
-	set sales(value: Array<Sale>) {
+	static set sales(value: Array<Sale>) {
 		this._sales = value;
 	}
 
-	get games(): Array<Game> {
+	static get games(): Array<Game> {
 		return this._games;
 	}
 
-	set games(value: Array<Game>) {
+	static set games(value: Array<Game>) {
 		this._games = value;
 	}
 
-	get developers(): Array<Developer> {
+	static get developers(): Array<Developer> {
 		return this._developers;
 	}
 
-	set developers(value: Array<Developer>) {
+	static set developers(value: Array<Developer>) {
 		this._developers = value;
 	}
 
-	get carriers(): Array<Carrier> {
+	static get carriers(): Array<Carrier> {
 		return this._carriers;
 	}
 
-	set carriers(value: Array<Carrier>) {
+	static set carriers(value: Array<Carrier>) {
 		this._carriers = value;
 	}
 
-	get clients(): Array<Client> {
+	static get clients(): Array<Client> {
 		return this._clients;
 	}
 
-	set clients(value: Array<Client>) {
+	static set clients(value: Array<Client>) {
 		this._clients = value;
 	}
 
-	get managers(): Array<Manager> {
+	static get managers(): Array<Manager> {
 		return this._managers;
 	}
 
-	set managers(value: Array<Manager>) {
+	static set managers(value: Array<Manager>) {
 		this._managers = value;
 	}
 }

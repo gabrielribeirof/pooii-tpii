@@ -17,26 +17,28 @@ export class UserController {
 			email,
 			registerDate,
 			level,
-			isEpic,
+			isEpic
 		} = request.body;
 
+		const client = new Client(
+			code,
+			name,
+			cpf,
+			rg,
+			birth,
+			address,
+			zipcode,
+			email,
+			registerDate,
+			level,
+			isEpic
+		)
+
 		EletronicGamesSystem.clients.push(
-			new Client(
-				code,
-				name,
-				cpf,
-				rg,
-				birth,
-				address,
-				zipcode,
-				email,
-				registerDate,
-				level,
-				isEpic,
-			),
+			client
 		);
 
-		response.status(201).send();
+		response.status(201).send(client);
 	}
 
 	public addManager(request: Request, response: Response): void {

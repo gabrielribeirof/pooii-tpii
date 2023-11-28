@@ -133,9 +133,11 @@ export class Sale {
 	}
 
 	public calculateDateDelivery(): void {
-		let dia = this._dateSale.getDay();
-		dia += this._carrier.timeCarrier;
-		this._dateDelivery.setDate(dia);
+		if(this._hasPhysicalProduct){
+			let dia = this._dateSale.getDay();
+			dia += this._carrier.timeCarrier;
+			this._dateDelivery.setDate(dia);
+		}
 	}
 
 	public addSaleItem(item: SaleItem): void {
