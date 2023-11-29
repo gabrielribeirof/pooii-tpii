@@ -15,6 +15,8 @@ export class SaleController {
 			carrier,
 		} = request.body;
 
+		client.level += 1;
+
 		const sale = new Sale(
 			code,
 			client,

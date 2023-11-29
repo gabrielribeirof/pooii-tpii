@@ -1,7 +1,7 @@
 import { type Game } from "./Game";
 import { type StrategySort } from "./StrategySort";
 
-export class BubbleSort implements StrategySort {
+export class StrategyBubbleSort implements StrategySort {
 	public sort(arr: Game[]): Game[] {
 		const size = arr.length;
 

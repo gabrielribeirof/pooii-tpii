@@ -1,7 +1,7 @@
 import { type Game } from "./Game";
 import { type StrategySort } from "./StrategySort";
 
-export class Quicksort implements StrategySort {
+export class StrategyQuicksort implements StrategySort {
 	public sort(arr: Game[]): Game[] {
 		this.quicksort(arr, 0, arr.length - 1);
 		return arr;

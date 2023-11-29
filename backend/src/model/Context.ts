@@ -3,9 +3,9 @@ import { type Game } from "./Game";
 import { type StrategySort } from "./StrategySort";
 
 export class Context {
-	private _strategy: StrategySort;
+	private _strategy?: StrategySort;
 
-	get strategy(): StrategySort {
+	get strategy(): StrategySort | undefined {
 		return this._strategy;
 	}
 
@@ -14,6 +14,8 @@ export class Context {
 	}
 
 	public executeStrategy(arr: Game[]): void {
-		EletronicGamesSystem.games(this.strategy.sort(arr));
+		if (this.strategy !== undefined) {
+			EletronicGamesSystem.games = this.strategy.sort(arr);
+		}
 	}
 }
