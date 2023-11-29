@@ -121,7 +121,7 @@ export class Sale {
 	public calculateTotalPrice(): number {
 		const it = new Iterator(this._saleItens);
 		let totalPrice = 0;
-		while (it.hasNext) {
+		while (it.hasNext()) {
 			const item = it.next();
 			totalPrice += item.price;
 		}

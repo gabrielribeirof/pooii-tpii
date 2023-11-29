@@ -1,5 +1,5 @@
 import { Game } from "./Game";
-import { type Developer } from "./Developer";
+
 export class Running extends Game {
 	private readonly taxRate: number = 0.0725;
 
