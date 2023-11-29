@@ -1,0 +1,38 @@
+.container {
+	width: 330px;
+	min-height: 100vh;
+	background-color: #222;
+}
+
+.logoContainer {
+	height: 100px;
+	padding: 20px;
+
+	display: flex;
+	align-items: center;
+}
+
+.navContainer {
+	padding-right: 5px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.navItem {
+	height: 80px;
+	padding-left: 30px;
+	border-radius: 0 50px 50px 0;
+	
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	
+	background-color: #222;
+	cursor: pointer;
+	transition: background-color 100ms;
+}
+
+.navItem:hover {
+	background-color: #383838;
+}
