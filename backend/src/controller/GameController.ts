@@ -50,9 +50,27 @@ export class GameController {
 	}
 
 	public addEvaluation(request: Request, response: Response): void {
-		const { exam, comment, client, game } = request.body;
+		const { exam, comment, clientCode, gameCode } = request.body;
+
+		const client = EletronicGamesSystem.clients.find(
+			(client) => client.code === clientCode,
+		);
+
+		if (!client) {
+			response.status(400).send();
+			return;
+		}
 
 		client.level += 0.5;
+
+		const game = EletronicGamesSystem.games.find(
+			(game) => game.code === gameCode,
+		);
+
+		if (!game) {
+			response.status(400).send();
+			return;
+		}
 
 		const evaluation = new Evaluation(exam, comment, client, game);
 

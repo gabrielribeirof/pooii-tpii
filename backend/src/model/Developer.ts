@@ -5,7 +5,7 @@ export class Developer {
 	private _email: string;
 	private _site: string;
 	private _socialNetwork: string;
-	private readonly _adress: string;
+	private readonly _address: string;
 
 	constructor(
 		code: number,
@@ -14,7 +14,7 @@ export class Developer {
 		email: string,
 		site: string,
 		socialNetwork: string,
-		adress: string,
+		address: string,
 	) {
 		this._code = code;
 		this._cnpj = cnpj;
@@ -22,7 +22,7 @@ export class Developer {
 		this._email = email;
 		this._site = site;
 		this._socialNetwork = socialNetwork;
-		this._adress = adress;
+		this._address = address;
 	}
 
 	get code(): number {
@@ -73,12 +73,12 @@ export class Developer {
 		this._socialNetwork = value;
 	}
 
-	get adress(): string {
-		return this._adress;
+	get address(): string {
+		return this._address;
 	}
 
-	set adress(value: string) {
-		this.adress = value;
+	set address(value: string) {
+		this.address = value;
 	}
 
 	public toString(): string {

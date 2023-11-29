@@ -3,9 +3,9 @@ import { Payment } from "./Payment";
 export class Card extends Payment {
 	private _flag: string;
 	private _name: string;
-	private readonly _number: number;
+	private _number: string;
 
-	constructor(codeNote: string, flag: string, name: string, number: number) {
+	constructor(codeNote: string, flag: string, name: string, number: string) {
 		super(codeNote);
 		this._flag = flag;
 		this._name = name;
@@ -20,20 +20,20 @@ export class Card extends Payment {
 		this._flag = value;
 	}
 
-	get nome(): string {
+	get name(): string {
 		return this._name;
 	}
 
-	set nome(value: string) {
+	set name(value: string) {
 		this._name = value;
 	}
 
 	get number(): string {
-		return this.number;
+		return this._number;
 	}
 
 	set number(value: string) {
-		this.number = value;
+		this._number = value;
 	}
 
 	public toString(): string {

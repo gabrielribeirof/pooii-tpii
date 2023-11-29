@@ -12,7 +12,7 @@ export class Sale {
 	private _manager: Manager;
 	private _dateSale: Date;
 	private _dateDelivery: Date;
-	private readonly _saleItens: SaleItem[];
+	private readonly _saleItems: SaleItem[];
 	private _hasPhysicalProduct: boolean;
 	private _totalPrice: number;
 	private _priceDiscount: number;
@@ -39,7 +39,7 @@ export class Sale {
 		this._hasPhysicalProduct = hasPhysicalProduct;
 		this._priceDiscount = 0;
 		this._totalPrice = this.calculateTotalPrice();
-		this._saleItens = new Array<SaleItem>();
+		this._saleItems = new Array<SaleItem>();
 	}
 
 	get code(): number {
@@ -106,12 +106,16 @@ export class Sale {
 		this._priceDiscount = value;
 	}
 
-	get pay(): Payment {
+	get payment(): Payment {
 		return this._payment;
 	}
 
-	set pay(value: Payment) {
+	set payment(value: Payment) {
 		this._payment = value;
+	}
+
+	get saleItems(): SaleItem[] {
+		return this._saleItems;
 	}
 
 	public toString(): string {
@@ -119,7 +123,7 @@ export class Sale {
 	}
 
 	public calculateTotalPrice(): number {
-		const it = new Iterator(this._saleItens);
+		const it = new Iterator(this._saleItems);
 		let totalPrice = 0;
 		while (it.hasNext()) {
 			const item = it.next();
@@ -142,6 +146,6 @@ export class Sale {
 	}
 
 	public addSaleItem(item: SaleItem): void {
-		this._saleItens.push(item);
+		this._saleItems.push(item);
 	}
 }

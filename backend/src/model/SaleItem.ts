@@ -1,10 +1,12 @@
+import { EletronicGamesSystem } from "./EletronicGamesSystem";
+
 export class SaleItem {
 	private _price: number;
 	private _quantity: number;
 	private _codeProduct: number;
 
-	constructor(price: number, quantity: number, codeProduct: number) {
-		this._price = price;
+	constructor(quantity: number, codeProduct: number) {
+		this._price = this.calculateTotalPrice();
 		this._quantity = quantity;
 		this._codeProduct = codeProduct;
 	}
@@ -38,6 +40,11 @@ export class SaleItem {
 	}
 
 	public calculateTotalPrice(): number {
-		return this._quantity * this._price;
+		const game = EletronicGamesSystem.games.find(
+			(game) => game.code === this._codeProduct,
+		);
+
+		if (game) return this._quantity * game.price;
+		else return 0;
 	}
 }
