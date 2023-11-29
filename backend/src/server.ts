@@ -13,7 +13,7 @@ app.post("users/managers", userController.addManager);
 app.post("game/addGame", gameController.addGame);
 app.post("game/evaluation", gameController.addEvaluation);
 app.put("game/listing", gameController.gameListing);
-// app.put("game/listing/action", gameController.gameListingAction);//
+app.put("game/listingOrdered", gameController.gameListingOrdered);
 
 app.use("*", (_, response) =>
 	response.status(404).send({ message: "Not Found" }),
