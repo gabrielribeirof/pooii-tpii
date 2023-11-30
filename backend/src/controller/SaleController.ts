@@ -22,7 +22,6 @@ export class SaleController {
 		} = request.body;
 
 		const saleItemsTyped = saleItems as Array<{
-			price: number;
 			quantity: number;
 			codeProduct: number;
 		}>;
@@ -86,9 +85,7 @@ export class SaleController {
 		);
 
 		for (const saleItem of saleItemsTyped) {
-			sale.addSaleItem(
-				new SaleItem(saleItem.price, saleItem.quantity, saleItem.codeProduct),
-			);
+			sale.addSaleItem(new SaleItem(saleItem.quantity, saleItem.codeProduct));
 		}
 		EletronicGamesSystem.sales.push(sale);
 

@@ -159,11 +159,11 @@ export class GameController {
 			case "bubblesort":
 				response.status(201).send(this.gameListingBlubblesort());
 				break;
-			case "asc":
-				response.status(201).send(this.gameListingAsc());
+			case "expensive":
+				response.status(201).send(this.gameListingExpensive());
 				break;
-			case "desc":
-				response.status(201).send(this.gameListingDesc());
+			case "cheap":
+				response.status(201).send(this.gameListingCheap());
 				break;
 			default:
 				break;
@@ -184,14 +184,19 @@ export class GameController {
 		return EletronicGamesSystem.games;
 	}
 
-	private gameListingAsc(): Game[] {
-		return this.gameListingQuicksort().slice(0, 11);
+	private gameListingExpensive(): Game[] {
+		return EletronicGamesSystem.games
+			.sort((a, b) => a.price - b.price) // sort by price
+			.slice(
+				// takes the last 10 elements of array ordered, that is the higher price
+				EletronicGamesSystem.games.length - 10,
+				EletronicGamesSystem.games.length,
+			);
 	}
 
-	private gameListingDesc(): Game[] {
-		return this.gameListingQuicksort().slice(
-			this.gameListingQuicksort().length - 11,
-			this.gameListingQuicksort().length,
-		);
+	private gameListingCheap(): Game[] {
+		return EletronicGamesSystem.games
+			.sort((a, b) => a.price - b.price)
+			.slice(0, 11); // takes the fist 10 elements of array ordered, that is the lower price
 	}
 }
