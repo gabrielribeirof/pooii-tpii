@@ -2,7 +2,6 @@ import { type Request, type Response } from "express";
 
 import { EletronicGamesSystem } from "../model/EletronicGamesSystem";
 import { FactoryGame } from "../model/FactoryGame";
-import { Evaluation } from "../model/Evaluation";
 import { Iterator } from "../util/Iterator";
 import { type Game } from "../model/Game";
 import { Action } from "../model/Action";
@@ -47,36 +46,6 @@ export class GameController {
 		EletronicGamesSystem.games.push(game);
 
 		response.status(201).send(game);
-	}
-
-	public addEvaluation(request: Request, response: Response): void {
-		const { exam, comment, clientCode, gameCode } = request.body;
-
-		const client = EletronicGamesSystem.clients.find(
-			(client) => client.code === clientCode,
-		);
-
-		if (!client) {
-			response.status(400).send();
-			return;
-		}
-
-		client.level += 0.5;
-
-		const game = EletronicGamesSystem.games.find(
-			(game) => game.code === gameCode,
-		);
-
-		if (!game) {
-			response.status(400).send();
-			return;
-		}
-
-		const evaluation = new Evaluation(exam, comment, client, game);
-
-		EletronicGamesSystem.evaluations.push(evaluation);
-
-		response.status(201).send(evaluation);
 	}
 
 	public gameListing(request: Request, response: Response): void {
