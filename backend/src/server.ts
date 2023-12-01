@@ -15,7 +15,7 @@ const carrierController = new CarrierController();
 app.post("users/clients", userController.addClient);
 app.post("users/managers", userController.addManager);
 app.post("game/addGame", gameController.addGame);
-app.post("game/Review", gameController.addReview);
+// app.post("game/Review", gameController.addReview);
 app.put("game/listing", gameController.gameListing);
 app.put("game/listingOrdered", gameController.gameListingOrdered);
 app.post("developer/addDeveloper", developerController.addDeveloper);
@@ -34,6 +34,6 @@ app.use("*", (_, response) =>
 	response.status(404).send({ message: "Not Found" }),
 );
 
-app.listen(3000, () => {
-	console.log("Backend rodando em http://localhost:3000");
+app.listen(3001, () => {
+	console.log("Backend rodando em http://localhost:3001");
 });
