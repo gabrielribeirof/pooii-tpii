@@ -8,6 +8,7 @@ import { CarrierController } from "./controller/CarrierController";
 import { ReviewController } from "./controller/ReviewController";
 import { EletronicGamesSystem } from "./model/EletronicGamesSystem";
 import { Developer } from "./model/Developer";
+import { SaleController } from "./controller/SaleController";
 
 const app = express();
 
@@ -25,6 +26,7 @@ const gameController = new GameController();
 const reviewController = new ReviewController();
 const developerController = new DeveloperController();
 const carrierController = new CarrierController();
+const saleController = new SaleController();
 
 app.post("/users/clients", userController.addClient);
 app.post("/users/managers", userController.addManager);
@@ -43,6 +45,11 @@ app.put(
 	developerController.developerListingByProfit,
 );
 app.put("/carrier", carrierController.addCarrier);
+app.post("/sale/addSale", saleController.addSale);
+app.put("/sale/listing", saleController.saleListing);
+app.put("/sale/listingPayment", saleController.saleListingByPayment);
+app.put("/sale/listingMonth", saleController.saleListingMonth);
+app.put("/sale/listingMonthDev", saleController.saleListingMonthDev);
 
 app.use("*", (_, response) =>
 	response.status(404).json({
