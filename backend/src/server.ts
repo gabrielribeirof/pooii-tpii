@@ -15,7 +15,7 @@ const carrierController = new CarrierController();
 app.post("users/clients", userController.addClient);
 app.post("users/managers", userController.addManager);
 app.post("game/addGame", gameController.addGame);
-app.post("game/evaluation", gameController.addEvaluation);
+app.post("game/Review", gameController.addReview);
 app.put("game/listing", gameController.gameListing);
 app.put("game/listingOrdered", gameController.gameListingOrdered);
 app.post("developer/addDeveloper", developerController.addDeveloper);

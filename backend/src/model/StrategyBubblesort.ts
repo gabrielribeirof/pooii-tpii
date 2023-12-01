@@ -23,7 +23,7 @@ export class StrategyBubbleSort implements StrategySort {
 			swapped = false;
 
 			for (let j = 0; j < size - i - 1; j++) {
-				if (arr[j].exam > arr[j + 1].exam) {
+				if (arr[j].note > arr[j + 1].note) {
 					this.swap(arr, j, j + 1);
 					swapped = true;
 				}

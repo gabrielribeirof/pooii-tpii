@@ -1,4 +1,7 @@
+import { Iterator } from "../util/Iterator";
+
 import { type Developer } from "./Developer";
+import { EletronicGamesSystem } from "./EletronicGamesSystem";
 
 export abstract class Game {
 	protected _code: number;
@@ -7,9 +10,9 @@ export abstract class Game {
 	protected _developer: Developer;
 	protected _dateNew: Date;
 	protected _price: number;
-	protected _exam: number;
+	protected _note: number;
+	protected _quantityReviews: number;
 	protected _requirimentMin: string;
-	protected _comment: string;
 	protected _avaliable: boolean;
 
 	constructor(
@@ -19,9 +22,7 @@ export abstract class Game {
 		developer: Developer,
 		dateNew: Date,
 		price: number,
-		exam: number,
 		requirimentMin: string,
-		comment: string,
 		avaliable: boolean,
 	) {
 		this._code = code;
@@ -30,9 +31,9 @@ export abstract class Game {
 		this._developer = developer;
 		this._dateNew = dateNew;
 		this._price = price;
-		this._exam = exam;
+		this._note = this.calculateNote();
+		this._quantityReviews = 0;
 		this._requirimentMin = requirimentMin;
-		this._comment = comment;
 		this._avaliable = avaliable;
 	}
 
@@ -84,12 +85,20 @@ export abstract class Game {
 		this._price = value;
 	}
 
-	get exam(): number {
-		return this._exam;
+	get note(): number {
+		return this._note;
 	}
 
-	set exam(value: number) {
-		this._exam = value;
+	set note(value: number) {
+		this._note = value;
+	}
+
+	get quantityReviews(): number {
+		return this._quantityReviews;
+	}
+
+	set quantityReviews(value: number) {
+		this._quantityReviews = value;
 	}
 
 	get requirimentMin(): string {
@@ -98,14 +107,6 @@ export abstract class Game {
 
 	set requirimentMin(value: string) {
 		this._requirimentMin = value;
-	}
-
-	get comment(): string {
-		return this._comment;
-	}
-
-	set comment(value: string) {
-		this._comment = value;
 	}
 
 	get avaliable(): boolean {
@@ -125,4 +126,13 @@ export abstract class Game {
 	}
 
 	public abstract calculateValue(): number;
+
+	public calculateNote(): number {
+		const it = new Iterator(EletronicGamesSystem.reviews);
+		let note: number = 0;
+		while (it.hasNext()) {
+			if (it.current().game.code === this._code) note += it.next().note;
+		}
+		return note / this._quantityReviews;
+	}
 }

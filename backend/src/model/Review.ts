@@ -1,25 +1,25 @@
 import { type Client } from "./Client";
 import { type Game } from "./Game";
 
-export class Evaluation {
-	private _exam: number;
+export class Review {
+	private _note: number;
 	private _comment: string;
 	private _client: Client;
 	private _game: Game;
 
-	constructor(exam: number, comment: string, client: Client, game: Game) {
-		this._exam = exam;
+	constructor(note: number, comment: string, client: Client, game: Game) {
+		this._note = note;
 		this._comment = comment;
 		this._client = client;
 		this._game = game;
 	}
 
-	get exam(): number {
-		return this._exam;
+	get note(): number {
+		return this._note;
 	}
 
-	set exam(value: number) {
-		this._exam = value;
+	set note(value: number) {
+		this._note = value;
 	}
 
 	get comment(): string {

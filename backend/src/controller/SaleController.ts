@@ -7,6 +7,7 @@ import { Pix } from "../model/Pix";
 import { type Payment } from "../model/Payment";
 import { Card } from "../model/Card";
 import { Receipt } from "../model/Receipt";
+import { Iterator } from "../util/Iterator";
 
 export class SaleController {
 	public addSale(request: Request, response: Response): void {
@@ -90,5 +91,102 @@ export class SaleController {
 		EletronicGamesSystem.sales.push(sale);
 
 		response.status(201).send(sale);
+	}
+
+	public saleListing(request: Request, response: Response): void {
+		response.status(201).send(EletronicGamesSystem.sales);
+	}
+
+	public saleListingByPayment(request: Request, response: Response): void {
+		const { paymentType } = request.query;
+
+		switch (paymentType) {
+			case "receipt":
+				response.status(201).send(this.saleListingReceipt());
+				break;
+			case "pix":
+				response.status(201).send(this.saleListingPix());
+				break;
+			case "Card":
+				response.status(201).send(this.saleListingCard());
+				break;
+		}
+	}
+
+	private saleListingReceipt(): Sale[] {
+		const it = new Iterator(EletronicGamesSystem.sales);
+		const salesTyped: Sale[] = [];
+		while (it.hasNext()) {
+			if (it.current() instanceof Receipt) salesTyped.push(it.next());
+		}
+		return salesTyped;
+	}
+
+	private saleListingPix(): Sale[] {
+		const it = new Iterator(EletronicGamesSystem.sales);
+		const salesTyped: Sale[] = [];
+		while (it.hasNext()) {
+			if (it.current() instanceof Pix) salesTyped.push(it.next());
+		}
+		return salesTyped;
+	}
+
+	private saleListingCard(): Sale[] {
+		const it = new Iterator(EletronicGamesSystem.sales);
+		const salesTyped: Sale[] = [];
+		while (it.hasNext()) {
+			if (it.current() instanceof Card) salesTyped.push(it.next());
+		}
+		return salesTyped;
+	}
+
+	public saleListingMonth(request: Request, response: Response): void {
+		const { month } = request.query;
+		const monthParsed = parseInt(String(month));
+		const it = new Iterator(EletronicGamesSystem.sales);
+		const salesMonth: Sale[] = [];
+		let profit: number = 0;
+		while (it.hasNext()) {
+			if (it.current().dateSale.getMonth() === monthParsed) {
+				salesMonth.push(it.current());
+				profit += it.next().priceDiscount;
+			}
+		}
+		response.status(201).send({
+			salesMonth,
+			profit,
+		});
+	}
+
+	public saleListingMonthDev(request: Request, response: Response): void {
+		const { month, developerCode } = request.query;
+		const monthParsed = parseInt(String(month));
+		const developerCodeParsed = parseInt(String(developerCode));
+		const itSale = new Iterator(EletronicGamesSystem.sales);
+		const salesMonth: Sale[] = [];
+		let profit: number = 0;
+		while (itSale.hasNext()) {
+			const itItem = new Iterator(itSale.current().saleItems);
+			const game = EletronicGamesSystem.games.find(
+				(game) => game.code === itItem.next().codeProduct,
+			);
+
+			if (!game) {
+				response.status(400).send();
+				return;
+			}
+
+			if (
+				itSale.current().dateSale.getMonth() === monthParsed &&
+				game.developer.code === developerCodeParsed
+			) {
+				salesMonth.push(itSale.current());
+				profit += game.price;
+			}
+		}
+		response.status(201).send({
+			salesMonth,
+			profit,
+		});
 	}
 }

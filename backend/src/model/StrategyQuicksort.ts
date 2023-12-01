@@ -17,10 +17,10 @@ export class StrategyQuicksort implements StrategySort {
 	}
 
 	private partition(arr: Game[], low: number, high: number): number {
-		const pivot = arr[high].exam;
+		const pivot = arr[high].note;
 		let i = low;
 		for (let j = low; j < high; j++) {
-			if (arr[j].exam < pivot) {
+			if (arr[j].note < pivot) {
 				this.swap(arr, i, j);
 				i++;
 			}

@@ -20,14 +20,23 @@ export class GameController {
 			code,
 			name,
 			description,
-			developer,
+			developerCode,
 			dateNew,
 			price,
-			exam,
+			note,
 			requirimentMin,
 			comment,
 			avaliable,
 		} = request.body;
+
+		const developer = EletronicGamesSystem.developers.find(
+			(developer) => developer.code === developerCode,
+		);
+
+		if (!developer) {
+			response.status(400).send();
+			return;
+		}
 
 		const game = FactoryGame.factoryMethod(
 			gameType,
@@ -37,7 +46,7 @@ export class GameController {
 			developer,
 			dateNew,
 			price,
-			exam,
+			note,
 			requirimentMin,
 			comment,
 			avaliable,

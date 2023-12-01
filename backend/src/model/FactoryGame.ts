@@ -15,7 +15,7 @@ export class FactoryGame {
 		developer: Developer,
 		dateNew: Date,
 		price: number,
-		exam: number,
+		note: number,
 		requirimentMin: string,
 		comment: string,
 		avaliable: boolean,
@@ -29,9 +29,7 @@ export class FactoryGame {
 					developer,
 					dateNew,
 					price,
-					exam,
 					requirimentMin,
-					comment,
 					avaliable,
 				);
 				break;
@@ -43,9 +41,7 @@ export class FactoryGame {
 					developer,
 					dateNew,
 					price,
-					exam,
 					requirimentMin,
-					comment,
 					avaliable,
 				);
 				break;
@@ -57,9 +53,7 @@ export class FactoryGame {
 					developer,
 					dateNew,
 					price,
-					exam,
 					requirimentMin,
-					comment,
 					avaliable,
 				);
 				break;
@@ -71,9 +65,7 @@ export class FactoryGame {
 					developer,
 					dateNew,
 					price,
-					exam,
 					requirimentMin,
-					comment,
 					avaliable,
 				);
 				break;
@@ -85,9 +77,7 @@ export class FactoryGame {
 					developer,
 					dateNew,
 					price,
-					exam,
 					requirimentMin,
-					comment,
 					avaliable,
 				);
 				break;
@@ -99,9 +89,7 @@ export class FactoryGame {
 					developer,
 					dateNew,
 					price,
-					exam,
 					requirimentMin,
-					comment,
 					avaliable,
 				);
 		}

@@ -1,7 +1,7 @@
 import { type Carrier } from "./Carrier";
 import { type Client } from "./Client";
 import { type Developer } from "./Developer";
-import { type Evaluation } from "./Evaluation";
+import { type Review } from "./Review";
 import { type Game } from "./Game";
 import { type Manager } from "./Manager";
 import { type Sale } from "./Sale";
@@ -14,7 +14,7 @@ export class EletronicGamesSystem {
 	private static _carriers: Carrier[];
 	private static _clients: Client[];
 	private static _managers: Manager[];
-	private static _evaluations: Evaluation[];
+	private static _reviews: Review[];
 
 	constructor(platformName: string) {
 		EletronicGamesSystem._platformName = platformName;
@@ -24,7 +24,7 @@ export class EletronicGamesSystem {
 		EletronicGamesSystem._carriers = new Array<Carrier>();
 		EletronicGamesSystem._clients = new Array<Client>();
 		EletronicGamesSystem._managers = new Array<Manager>();
-		EletronicGamesSystem._evaluations = new Array<Evaluation>();
+		EletronicGamesSystem._reviews = new Array<Review>();
 	}
 
 	static get platformName(): string {
@@ -83,11 +83,11 @@ export class EletronicGamesSystem {
 		this._managers = value;
 	}
 
-	static get evaluations(): Evaluation[] {
-		return this._evaluations;
+	static get reviews(): Review[] {
+		return this._reviews;
 	}
 
-	static set evaluations(value: Evaluation[]) {
-		this._evaluations = value;
+	static set reviews(value: Review[]) {
+		this._reviews = value;
 	}
 }

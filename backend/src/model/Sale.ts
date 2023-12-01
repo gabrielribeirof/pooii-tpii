@@ -14,8 +14,8 @@ export class Sale {
 	private _dateDelivery: Date;
 	private readonly _saleItems: SaleItem[];
 	private _hasPhysicalProduct: boolean;
-	private _totalPrice: number;
-	private _priceDiscount: number;
+	private readonly _totalPrice: number;
+	private readonly _priceDiscount: number;
 	private _payment: Payment;
 	private readonly _carrier: Carrier;
 
@@ -37,8 +37,8 @@ export class Sale {
 		this._carrier = carrier;
 		this._payment = payment;
 		this._hasPhysicalProduct = hasPhysicalProduct;
-		this._priceDiscount = 0;
 		this._totalPrice = this.calculateTotalPrice();
+		this._priceDiscount = this.calculatePriceDiscount();
 		this._saleItems = new Array<SaleItem>();
 	}
 
@@ -90,20 +90,12 @@ export class Sale {
 		this._hasPhysicalProduct = value;
 	}
 
-	get priceTotal(): number {
-		return this._totalPrice;
-	}
-
-	set priceTotal(value: number) {
-		this._totalPrice = value;
+	get totalPrice(): number {
+		return this.calculateTotalPrice();
 	}
 
 	get priceDiscount(): number {
-		return this._priceDiscount;
-	}
-
-	set priceDiscount(value: number) {
-		this._priceDiscount = value;
+		return this.calculatePriceDiscount();
 	}
 
 	get payment(): Payment {
@@ -129,12 +121,12 @@ export class Sale {
 			const item = it.next();
 			totalPrice += item.price;
 		}
-		if (this._client.isEpic) {
-			this.priceDiscount = totalPrice;
-			return totalPrice - totalPrice * 0.05;
-		} else {
-			return totalPrice;
-		}
+		return totalPrice;
+	}
+
+	public calculatePriceDiscount(): number {
+		if (this._client.isEpic) return this.totalPrice - this.totalPrice * 0.05;
+		else return this.totalPrice;
 	}
 
 	public calculateDateDelivery(): void {
