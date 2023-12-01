@@ -21,11 +21,11 @@ export class DeveloperController {
 
 		EletronicGamesSystem.developers.push(developer);
 
-		response.status(201).send(developer);
+		response.status(201).json(developer);
 	}
 
 	public developerListing(request: Request, response: Response): void {
-		response.status(201).send(EletronicGamesSystem.developers);
+		response.status(201).json(EletronicGamesSystem.developers);
 	}
 
 	public developerListingByMoreSales(
@@ -59,7 +59,7 @@ export class DeveloperController {
 
 		response
 			.status(201)
-			.send(
+			.json(
 				developersSales.sort((a, b) => a[1] - b[1]).map((value) => value[0]),
 			);
 	}
@@ -92,7 +92,7 @@ export class DeveloperController {
 
 		response
 			.status(201)
-			.send(
+			.json(
 				developersSales.sort((a, b) => a[1] - b[1]).map((value) => value[0]),
 			);
 	}

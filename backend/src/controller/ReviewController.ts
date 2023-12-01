@@ -12,7 +12,7 @@ export class ReviewController {
 		);
 
 		if (!client) {
-			response.status(400).send();
+			response.status(400).json();
 			return;
 		}
 
@@ -23,7 +23,7 @@ export class ReviewController {
 		);
 
 		if (!game) {
-			response.status(400).send();
+			response.status(400).json();
 			return;
 		}
 
@@ -33,10 +33,10 @@ export class ReviewController {
 
 		EletronicGamesSystem.reviews.push(review);
 
-		response.status(201).send(review);
+		response.status(201).json(review);
 	}
 
 	public ReviewListing(request: Request, response: Response): void {
-		response.status(201).send(EletronicGamesSystem.reviews);
+		response.status(201).json(EletronicGamesSystem.reviews);
 	}
 }

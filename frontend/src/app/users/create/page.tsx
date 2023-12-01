@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 import { SelectInput } from "../../../components/SelectInput";
+import { api } from "../../../services/api";
 
 interface FormData {
 	code: string;
@@ -25,16 +26,12 @@ export default function CreateUser() {
 
 	useEffect(() => {
 		async function go() {
-			const response = (await (
-				await fetch(
-					"https://bookish-doodle-9q4vqj65j9537p9j-3001.preview.app.github.dev/developer/developerListing",
-				)
-			).json()) as Array<{ _name: string; _code: number }>;
-
-			console.log(response);
+			const response = await api.get<Array<{ _name: string; _code: number }>>(
+				"developer/developerListing",
+			);
 
 			setDeveloperOptions(
-				response.map((developer) => ({
+				response.data.map((developer) => ({
 					label: developer._name,
 					value: String(developer._code),
 				})),

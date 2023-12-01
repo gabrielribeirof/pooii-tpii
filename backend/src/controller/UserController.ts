@@ -37,7 +37,7 @@ export class UserController {
 
 		EletronicGamesSystem.clients.push(client);
 
-		response.status(201).send(client);
+		response.status(201).json(client);
 	}
 
 	public addManager(request: Request, response: Response): void {
@@ -71,7 +71,7 @@ export class UserController {
 
 		EletronicGamesSystem.managers.push(manager);
 
-		response.status(201).send(manager);
+		response.status(201).json(manager);
 	}
 
 	public userListing(request: Request, response: Response): void {
@@ -79,16 +79,16 @@ export class UserController {
 
 		switch (userType) {
 			case "client":
-				response.status(201).send(EletronicGamesSystem.clients);
+				response.status(201).json(EletronicGamesSystem.clients);
 				break;
 			case "manager":
-				response.status(201).send(EletronicGamesSystem.managers);
+				response.status(201).json(EletronicGamesSystem.managers);
 				break;
 			case "epic":
-				response.status(201).send(this.userListingEpic());
+				response.status(201).json(this.userListingEpic());
 				break;
 			case "level":
-				response.status(201).send(this.userListingLevel());
+				response.status(201).json(this.userListingLevel());
 				break;
 		}
 	}

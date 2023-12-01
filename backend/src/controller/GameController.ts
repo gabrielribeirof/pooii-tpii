@@ -34,7 +34,7 @@ export class GameController {
 		);
 
 		if (!developer) {
-			response.status(400).send();
+			response.status(400).json();
 			return;
 		}
 
@@ -54,7 +54,7 @@ export class GameController {
 
 		EletronicGamesSystem.games.push(game);
 
-		response.status(201).send(game);
+		response.status(201).json(game);
 	}
 
 	public gameListing(request: Request, response: Response): void {
@@ -62,22 +62,22 @@ export class GameController {
 
 		switch (gameType) {
 			case "action":
-				response.status(201).send(this.gameListingAction());
+				response.status(201).json(this.gameListingAction());
 				break;
 			case "adventure":
-				response.status(201).send(this.gameListingAdventure());
+				response.status(201).json(this.gameListingAdventure());
 				break;
 			case "rpg":
-				response.status(201).send(this.gameListingRpg());
+				response.status(201).json(this.gameListingRpg());
 				break;
 			case "running":
-				response.status(201).send(this.gameListingRunning());
+				response.status(201).json(this.gameListingRunning());
 				break;
 			case "sport":
-				response.status(201).send(this.gameListingSport());
+				response.status(201).json(this.gameListingSport());
 				break;
 			default:
-				response.status(201).send(EletronicGamesSystem.games);
+				response.status(201).json(EletronicGamesSystem.games);
 				break;
 		}
 	}
@@ -132,16 +132,16 @@ export class GameController {
 
 		switch (sortType) {
 			case "quicksort":
-				response.status(201).send(this.gameListingQuicksort());
+				response.status(201).json(this.gameListingQuicksort());
 				break;
 			case "bubblesort":
-				response.status(201).send(this.gameListingBlubblesort());
+				response.status(201).json(this.gameListingBlubblesort());
 				break;
 			case "expensive":
-				response.status(201).send(this.gameListingExpensive());
+				response.status(201).json(this.gameListingExpensive());
 				break;
 			case "cheap":
-				response.status(201).send(this.gameListingCheap());
+				response.status(201).json(this.gameListingCheap());
 				break;
 			default:
 				break;

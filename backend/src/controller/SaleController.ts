@@ -42,7 +42,7 @@ export class SaleController {
 		} else if (paymentTyped instanceof Receipt) {
 			paymentInstance = new Receipt(paymentTyped.codeNote);
 		} else {
-			response.status(400).send();
+			response.status(400).json();
 			return;
 		}
 
@@ -51,7 +51,7 @@ export class SaleController {
 		);
 
 		if (!client) {
-			response.status(400).send();
+			response.status(400).json();
 			return;
 		}
 
@@ -62,7 +62,7 @@ export class SaleController {
 		);
 
 		if (!manager) {
-			response.status(400).send();
+			response.status(400).json();
 			return;
 		}
 
@@ -71,7 +71,7 @@ export class SaleController {
 		);
 
 		if (!carrier) {
-			response.status(400).send();
+			response.status(400).json();
 			return;
 		}
 
@@ -90,11 +90,11 @@ export class SaleController {
 		}
 		EletronicGamesSystem.sales.push(sale);
 
-		response.status(201).send(sale);
+		response.status(201).json(sale);
 	}
 
 	public saleListing(request: Request, response: Response): void {
-		response.status(201).send(EletronicGamesSystem.sales);
+		response.status(201).json(EletronicGamesSystem.sales);
 	}
 
 	public saleListingByPayment(request: Request, response: Response): void {
@@ -102,13 +102,13 @@ export class SaleController {
 
 		switch (paymentType) {
 			case "receipt":
-				response.status(201).send(this.saleListingReceipt());
+				response.status(201).json(this.saleListingReceipt());
 				break;
 			case "pix":
-				response.status(201).send(this.saleListingPix());
+				response.status(201).json(this.saleListingPix());
 				break;
 			case "Card":
-				response.status(201).send(this.saleListingCard());
+				response.status(201).json(this.saleListingCard());
 				break;
 		}
 	}
@@ -152,7 +152,7 @@ export class SaleController {
 				profit += it.next().priceDiscount;
 			}
 		}
-		response.status(201).send({
+		response.status(201).json({
 			salesMonth,
 			profit,
 		});
@@ -172,7 +172,7 @@ export class SaleController {
 			);
 
 			if (!game) {
-				response.status(400).send();
+				response.status(400).json();
 				return;
 			}
 
@@ -184,7 +184,7 @@ export class SaleController {
 				profit += game.price;
 			}
 		}
-		response.status(201).send({
+		response.status(201).json({
 			salesMonth,
 			profit,
 		});

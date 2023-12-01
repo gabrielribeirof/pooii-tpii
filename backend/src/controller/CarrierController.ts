@@ -20,10 +20,10 @@ export class CarrierController {
 
 		EletronicGamesSystem.carriers.push(carrier);
 
-		response.status(201).send(carrier);
+		response.status(201).json(carrier);
 	}
 
 	public developerListing(request: Request, response: Response): void {
-		response.status(201).send(EletronicGamesSystem.carriers);
+		response.status(201).json(EletronicGamesSystem.carriers);
 	}
 }
