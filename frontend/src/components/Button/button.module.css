@@ -1,0 +1,12 @@
+.container {
+	padding: 16px 0;
+	border: none;
+	border-radius: 8px;
+
+	color: #f1f1f1;
+	font-weight: bold;
+	font-size: 16px;
+
+	background: linear-gradient(90deg, hsl(202, 93%, 43%), hsl(202, 93%, 63%));
+	cursor: pointer;
+}

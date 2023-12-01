@@ -1,0 +1,32 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.container label {
+	font-size: 16px;
+}
+
+.container input {
+	padding: 14px;
+	border: 2px solid transparent;
+	border-radius: 8px;
+	
+	color: #f1f1f1;
+	font-size: 16px;
+
+	background-color: #1a1e2d;
+	outline: none;
+	transition: border-color 100ms;
+}
+
+.container input:focus {
+	border-color: #0889d4;
+}
+
+.container input[type=number],
+.container input::-webkit-outer-spin-button,
+.container input::-webkit-inner-spin-button {
+  appearance: none;
+}

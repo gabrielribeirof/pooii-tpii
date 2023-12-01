@@ -1,0 +1,63 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.container button {
+	padding: 14px;
+	border: 2px solid transparent;
+	border-radius: 8px;
+
+	display: flex;
+	gap: 6px;
+	align-items: center;
+
+	color: #f1f1f1;
+	font-size: 16px;
+	text-align: left;
+	
+	background-color: #1a1e2d;
+	outline: none;
+	cursor: pointer;
+}
+
+.container button > span {
+	display: flex;
+	align-items: center;
+}
+
+@keyframes rotateSpinner {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.container .spinner {
+	animation: rotateSpinner 2s linear infinite;
+}
+
+.content {
+	padding: 8px;
+	border-radius: 8px;
+
+	color: #222;
+
+	background-color: #FFF;
+}
+
+.item {
+	padding: 10px;
+
+	display: flex;
+	gap: 6px;
+
+	outline: none;
+	cursor: pointer;
+}
+
+.item:hover {
+	border-radius: 8px;
+	background-color: #0889d4;
+	color: #f1f1f1;
+}
