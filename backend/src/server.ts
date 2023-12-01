@@ -4,18 +4,20 @@ import { UserController } from "./controller/UserController";
 import { GameController } from "./controller/GameController";
 import { DeveloperController } from "./controller/DeveloperController";
 import { CarrierController } from "./controller/CarrierController";
+import { ReviewController } from "./controller/ReviewController";
 
 const app = express();
 
 const userController = new UserController();
 const gameController = new GameController();
+const reviewController = new ReviewController();
 const developerController = new DeveloperController();
 const carrierController = new CarrierController();
 
 app.post("users/clients", userController.addClient);
 app.post("users/managers", userController.addManager);
 app.post("game/addGame", gameController.addGame);
-// app.post("game/Review", gameController.addReview);
+app.post("game/addReview", reviewController.addReview);
 app.put("game/listing", gameController.gameListing);
 app.put("game/listingOrdered", gameController.gameListingOrdered);
 app.post("developer/addDeveloper", developerController.addDeveloper);
