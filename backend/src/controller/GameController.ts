@@ -13,7 +13,7 @@ import { Context } from "../model/Context";
 import { StrategyQuicksort } from "../model/StrategyQuicksort";
 import { StrategyBubbleSort } from "../model/StrategyBubblesort";
 
-export class GameController {
+class GameController {
 	public addGame(request: Request, response: Response): void {
 		const {
 			gameType,
@@ -178,3 +178,5 @@ export class GameController {
 			.slice(0, 11); // takes the fist 10 elements of array ordered, that is the lower price
 	}
 }
+
+export default new GameController();

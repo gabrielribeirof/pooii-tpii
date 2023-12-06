@@ -21,7 +21,7 @@ export default function CreateDeveloper() {
 
 	async function onSubmit(data: FormData) {
 		try {
-			await api.post("developer/addDeveloper", data);
+			await api.post("/developers", data);
 			alert("Cadastrado com sucesso");
 		} catch (error) {
 			alert("Erro ao cadatrar");

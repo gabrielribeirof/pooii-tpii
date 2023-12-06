@@ -3,7 +3,7 @@ import { type Request, type Response } from "express";
 import { Carrier } from "../model/Carrier";
 import { EletronicGamesSystem } from "../model/EletronicGamesSystem";
 
-export class CarrierController {
+class CarrierController {
 	public addCarrier(request: Request, response: Response): void {
 		const { code, cnpj, name, email, phone, timeCarrier, address } =
 			request.body;
@@ -27,3 +27,5 @@ export class CarrierController {
 		response.status(201).json(EletronicGamesSystem.carriers);
 	}
 }
+
+export default new CarrierController();

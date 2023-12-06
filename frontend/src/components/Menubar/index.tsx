@@ -40,8 +40,9 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/clients/list">Listar clientes</Link>
-							<Link href="/clients/top-10">Top 10 clientes por nível</Link>
+							<Link href="/clients/all">Listar clientes</Link>
+							<Link href="/clients/epic">Listar clientes épicos</Link>
+							<Link href="/clients/level">Top 10 clientes por nível</Link>
 							<Link href="/clients/create">Cadastrar cliente</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>
@@ -54,7 +55,7 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/managers/list">Listar gerente</Link>
+							<Link href="/managers/list">Listar gerentes</Link>
 							<Link href="/managers/create">Cadastrar gerente</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>

@@ -18,7 +18,7 @@ interface FormData {
 	available: string;
 }
 
-export default function CreateUser() {
+export default function CreateGames() {
 	const { control, register, handleSubmit } = useForm<FormData>();
 	const [developerOptions, setDeveloperOptions] = useState<
 		Array<{ label: string; value: string }> | undefined
@@ -26,9 +26,8 @@ export default function CreateUser() {
 
 	useEffect(() => {
 		async function go() {
-			const response = await api.get<Array<{ _name: string; _code: number }>>(
-				"developer/developerListing",
-			);
+			const response =
+				await api.get<Array<{ _name: string; _code: number }>>("developers");
 
 			setDeveloperOptions(
 				response.data.map((developer) => ({

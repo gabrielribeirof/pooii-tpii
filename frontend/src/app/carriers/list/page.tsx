@@ -2,8 +2,8 @@ import styles from "../../page.module.css";
 import { api } from "../../../services/api";
 import { Card } from "../../../components/Card";
 
-async function getDevelopers() {
-	const response = await api.get("/developers");
+async function getCarriers() {
+	const response = await api.get("/carriers");
 
 	return response.data as [
 		{
@@ -11,15 +11,15 @@ async function getDevelopers() {
 			_cnpj: string;
 			_name: string;
 			_email: string;
-			_site: string;
-			_socialNetwork: string;
+			_phone: string;
+			_deliveryTime: number;
 			_address: string;
 		},
 	];
 }
 
-export default async function ListDevelopers() {
-	const data = await getDevelopers();
+export default async function ListCarriers() {
+	const data = await getCarriers();
 
 	return (
 		<div className={styles.container}>
@@ -31,8 +31,11 @@ export default async function ListDevelopers() {
 						{ label: "Name", value: value._name },
 						{ label: "CNPJ", value: value._cnpj },
 						{ label: "E-mail", value: value._email },
-						{ label: "Site", value: value._site },
-						{ label: "Rede social", value: value._socialNetwork },
+						{ label: "Telefone", value: value._phone },
+						{
+							label: "Tempo de entrega",
+							value: String(value._deliveryTime),
+						},
 						{ label: "Endereço", value: value._address },
 					]}
 				/>

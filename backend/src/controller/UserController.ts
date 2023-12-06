@@ -5,7 +5,7 @@ import { Client } from "../model/Client";
 import { Manager } from "../model/Manager";
 import { Iterator } from "../util/Iterator";
 
-export class UserController {
+class UserController {
 	public addClient(request: Request, response: Response): void {
 		const {
 			code,
@@ -16,7 +16,6 @@ export class UserController {
 			address,
 			zipcode,
 			email,
-			registerDate,
 			level,
 			isEpic,
 		} = request.body;
@@ -26,11 +25,11 @@ export class UserController {
 			name,
 			cpf,
 			rg,
-			birth,
+			new Date(birth),
 			address,
 			zipcode,
 			email,
-			registerDate,
+			new Date(),
 			level,
 			isEpic,
 		);
@@ -79,16 +78,21 @@ export class UserController {
 
 		switch (userType) {
 			case "client":
-				response.status(201).json(EletronicGamesSystem.clients);
+				response.status(200).json(EletronicGamesSystem.clients);
 				break;
 			case "manager":
-				response.status(201).json(EletronicGamesSystem.managers);
+				response.status(200).json(EletronicGamesSystem.managers);
 				break;
 			case "epic":
-				response.status(201).json(this.userListingEpic());
+				console.log(this);
+				response.status(200).json(this.userListingEpic());
 				break;
 			case "level":
-				response.status(201).json(this.userListingLevel());
+				console.log(this);
+				response.status(200).json(this.userListingLevel());
+				break;
+			default:
+				response.status(400).send();
 				break;
 		}
 	}
@@ -103,12 +107,17 @@ export class UserController {
 	}
 
 	private userListingLevel(): Client[] {
-		return EletronicGamesSystem.clients
+		const d = EletronicGamesSystem.clients
 			.sort((a, b) => a.level - b.level) // clients ascending ordered by level
 			.slice(
 				// takes the last 10 elements of array ordered, that is the higher level
 				EletronicGamesSystem.clients.length - 10,
 				EletronicGamesSystem.clients.length,
 			);
+
+		console.log(d);
+		return d;
 	}
 }
+
+export default new UserController();

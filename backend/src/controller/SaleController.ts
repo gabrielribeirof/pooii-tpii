@@ -9,7 +9,7 @@ import { Card } from "../model/Card";
 import { Receipt } from "../model/Receipt";
 import { Iterator } from "../util/Iterator";
 
-export class SaleController {
+class SaleController {
 	public addSale(request: Request, response: Response): void {
 		const {
 			code,
@@ -190,3 +190,5 @@ export class SaleController {
 		});
 	}
 }
+
+export default new SaleController();

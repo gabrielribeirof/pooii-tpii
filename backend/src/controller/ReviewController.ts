@@ -3,7 +3,7 @@ import { type Request, type Response } from "express";
 import { Review } from "../model/Review";
 import { EletronicGamesSystem } from "../model/EletronicGamesSystem";
 
-export class ReviewController {
+class ReviewController {
 	public addReview(request: Request, response: Response): void {
 		const { note, comment, clientCode, gameCode } = request.body;
 
@@ -40,3 +40,5 @@ export class ReviewController {
 		response.status(201).json(EletronicGamesSystem.reviews);
 	}
 }
+
+export default new ReviewController();

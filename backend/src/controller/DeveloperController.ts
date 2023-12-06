@@ -4,7 +4,7 @@ import { Developer } from "../model/Developer";
 import { EletronicGamesSystem } from "../model/EletronicGamesSystem";
 import { Iterator } from "../util/Iterator";
 
-export class DeveloperController {
+class DeveloperController {
 	public addDeveloper(request: Request, response: Response): void {
 		const { code, cnpj, name, email, site, socialNetwork, address } =
 			request.body;
@@ -97,3 +97,5 @@ export class DeveloperController {
 			);
 	}
 }
+
+export default new DeveloperController();
