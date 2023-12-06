@@ -5,7 +5,7 @@ import { EletronicGamesSystem } from "../model/EletronicGamesSystem";
 
 class CarrierController {
 	public addCarrier(request: Request, response: Response): void {
-		const { code, cnpj, name, email, phone, timeCarrier, address } =
+		const { code, cnpj, name, email, phone, deliveryTime, address } =
 			request.body;
 
 		const carrier = new Carrier(
@@ -14,7 +14,7 @@ class CarrierController {
 			name,
 			email,
 			phone,
-			timeCarrier,
+			deliveryTime,
 			address,
 		);
 
