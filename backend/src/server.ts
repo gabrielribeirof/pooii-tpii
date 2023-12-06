@@ -12,6 +12,8 @@ import { Developer } from "./model/Developer";
 import { Carrier } from "./model/Carrier";
 import { Manager } from "./model/Manager";
 import { Client } from "./model/Client";
+import { Review } from "./model/Review";
+import { Action } from "./model/Action";
 
 const app = express();
 
@@ -30,6 +32,18 @@ EletronicGamesSystem.developers.push(
 		"rockstar.com",
 		"rockstar",
 		"Rua Endereço, 123",
+	),
+);
+EletronicGamesSystem.games.push(
+	new Action(
+		1,
+		"GTA 6",
+		"Game 1",
+		EletronicGamesSystem.developers[0],
+		new Date(),
+		100,
+		"50",
+		true,
 	),
 );
 EletronicGamesSystem.carriers.push(
@@ -73,6 +87,14 @@ EletronicGamesSystem.clients.push(
 		false,
 	),
 );
+EletronicGamesSystem.reviews.push(
+	new Review(
+		5,
+		"Comentário 1",
+		EletronicGamesSystem.clients[0],
+		EletronicGamesSystem.games[0],
+	),
+);
 
 app.post("/users/clients", UserController.addClient);
 app.post("/users/managers", UserController.addManager);
@@ -81,6 +103,7 @@ app.get("/users", (req, res) => {
 });
 app.post("/games", GameController.addGame);
 app.post("/reviews", ReviewController.addReview);
+app.get("/reviews", ReviewController.ReviewListing);
 app.get("/games", GameController.gameListing);
 app.get("/games/ordered", GameController.gameListingOrdered);
 app.post("/developers", DeveloperController.addDeveloper);

@@ -3,7 +3,7 @@ export class Iterator<T> {
 	private position: number = 0;
 
 	constructor(array: T[]) {
-		this.array = array;
+		this.array = array || [];
 	}
 
 	// Return the current element.
@@ -35,6 +35,10 @@ export class Iterator<T> {
 
 	// Verify if the array has next element.
 	public hasNext(): boolean {
+		if (this.array.length === 0) {
+			return false;
+		}
+
 		if (this.position + 1 === this.array.length) {
 			return false;
 		} else {
