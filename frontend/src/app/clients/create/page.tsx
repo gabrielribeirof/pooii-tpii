@@ -42,7 +42,12 @@ export default function CreateClients() {
 
 			<Input {...register("rg")} label="RG" required />
 
-			<Input {...register("birth")} label="Site" required type="date" />
+			<Input
+				{...register("birth")}
+				label="Data de nascimento"
+				type="date"
+				required
+			/>
 
 			<Input {...register("address")} label="Endereço" required />
 
