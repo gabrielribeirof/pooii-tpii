@@ -1,11 +1,11 @@
 export class Carrier {
-	private readonly _code: number;
+	private _code: number;
 	private _cnpj: string;
 	private _name: string;
 	private _email: string;
 	private _phone: string;
-	private _timeCarrier: number;
-	private readonly _aDdress: string;
+	private _deliveryTime: number;
+	private _address: string;
 
 	constructor(
 		code: number,
@@ -13,24 +13,24 @@ export class Carrier {
 		name: string,
 		email: string,
 		phone: string,
-		timeCarrier: number,
-		aDdress: string,
+		deliveryTime: number,
+		address: string,
 	) {
 		this._code = code;
 		this._cnpj = cnpj;
 		this._name = name;
 		this._email = email;
 		this._phone = phone;
-		this._timeCarrier = timeCarrier;
-		this._aDdress = aDdress;
+		this._deliveryTime = deliveryTime;
+		this._address = address;
 	}
 
 	get code(): number {
-		return this.code;
+		return this._code;
 	}
 
 	set code(value: number) {
-		this.code = value;
+		this._code = value;
 	}
 
 	get name(): string {
@@ -65,20 +65,20 @@ export class Carrier {
 		this._phone = value;
 	}
 
-	get timeCarrier(): number {
-		return this._timeCarrier;
+	get deliveryTime(): number {
+		return this._deliveryTime;
 	}
 
-	set timeCarrier(value: number) {
-		this._timeCarrier = value;
+	set deliveryTime(value: number) {
+		this._deliveryTime = value;
 	}
 
-	get aDdress(): string {
-		return this._aDdress;
+	get address(): string {
+		return this._address;
 	}
 
-	set aDdress(value: string) {
-		this.aDdress = value;
+	set address(value: string) {
+		this._address = value;
 	}
 
 	public toString(): string {
