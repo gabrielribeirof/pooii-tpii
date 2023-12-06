@@ -1,11 +1,10 @@
 "use client";
 
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 import { api } from "../../../services/api";
-import { SelectInput } from "../../../components/SelectInput";
 
 interface FormData {
 	code: number;
@@ -15,15 +14,18 @@ interface FormData {
 	rg: string;
 	birth: string;
 	address: string;
-	isEpic: string;
+	zipcode: string;
+	salary: string;
+	pis: string;
+	admissionDate: string;
 }
 
-export default function CreateClient() {
-	const { control, register, handleSubmit } = useForm<FormData>();
+export default function CreateManager() {
+	const { register, handleSubmit } = useForm<FormData>();
 
 	async function onSubmit(data: FormData) {
 		try {
-			await api.post("/users/clients", data);
+			await api.post("/users/managers", data);
 			alert("Cadastrado com sucesso");
 		} catch (error) {
 			alert("Erro ao cadatrar");
@@ -51,21 +53,17 @@ export default function CreateClient() {
 
 			<Input {...register("address")} label="Endereço" required />
 
-			<Controller
-				name="isEpic"
-				control={control}
-				render={({ field }) => (
-					<SelectInput
-						value={field.value}
-						onChange={field.onChange}
-						label="É épico?"
-						options={[
-							{ value: "true", label: "Sim" },
-							{ value: "false", label: "Não" },
-						]}
-						required
-					/>
-				)}
+			<Input {...register("zipcode")} label="CEP" required />
+
+			<Input {...register("salary")} label="Salário" type="number" required />
+
+			<Input {...register("pis")} label="PIS" required />
+
+			<Input
+				{...register("admissionDate")}
+				label="Data de admissão"
+				type="date"
+				required
 			/>
 
 			<Button type="submit">Salvar</Button>
