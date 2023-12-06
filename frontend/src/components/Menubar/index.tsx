@@ -17,8 +17,6 @@ import styles from "./menubar.module.css";
 export function Menubar() {
 	return (
 		<div className={styles.container}>
-			<div className={styles.logoContainer}>KBGames</div>
-
 			<NavigationMenu.Root className={styles.navContainer}>
 				<NavigationMenu.List className={styles.navList}>
 					<NavigationMenu.Item>
@@ -29,7 +27,7 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/users/create">Cadastrar jogo</Link>
+							<Link href="/games/create">Cadastrar jogo</Link>
 							<Link href="/">Listar jogos</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>
@@ -42,9 +40,9 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/">Listar clientes</Link>
-							<Link href="/">Top 10 clientes por nível</Link>
-							<Link href="/">Cadastrar cliente</Link>
+							<Link href="/clients/list">Listar clientes</Link>
+							<Link href="/clients/top-10">Top 10 clientes por nível</Link>
+							<Link href="/clients/create">Cadastrar cliente</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>
 
@@ -56,7 +54,8 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/">Cadastrar gerente</Link>
+							<Link href="/managers/list">Listar gerente</Link>
+							<Link href="/managers/create">Cadastrar gerente</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>
 
@@ -81,8 +80,8 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/">Listar transportadoras</Link>
-							<Link href="/">Cadastrar transportadora</Link>
+							<Link href="/carriers/list">Listar transportadoras</Link>
+							<Link href="/carriers/create">Cadastrar transportadora</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>
 
@@ -94,10 +93,12 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/">Listar vendas</Link>
-							<Link href="/">Listar vendas por usuário</Link>
-							<Link href="/">Listar vendas por desenvolvedora</Link>
-							<Link href="/">Cadastrar venda</Link>
+							<Link href="/sales/list">Listar vendas</Link>
+							<Link href="/sales/list-by-users">Listar vendas por usuário</Link>
+							<Link href="/sales/list-by-developers">
+								Listar vendas por desenvolvedora
+							</Link>
+							<Link href="/sales/create">Cadastrar venda</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>
 
@@ -109,7 +110,8 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/">Cadastrar avaliação</Link>
+							<Link href="/reviews/list">Listar avaliações</Link>
+							<Link href="/reviews/create">Cadastrar avaliação</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>
 				</NavigationMenu.List>
