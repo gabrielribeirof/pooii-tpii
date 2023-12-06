@@ -7,6 +7,7 @@ import { Input } from "../../../components/Input";
 import { api } from "../../../services/api";
 
 interface FormData {
+	code: string;
 	name: string;
 	star: number;
 	comment: string;
@@ -26,6 +27,8 @@ export default function CreateCarrier() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
+			<Input {...register("code")} label="Código" required />
+
 			<Input {...register("name")} label="Nome" required />
 
 			<Input
