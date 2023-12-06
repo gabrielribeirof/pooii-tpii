@@ -7,18 +7,8 @@ import { Iterator } from "../util/Iterator";
 
 class UserController {
 	public addClient(request: Request, response: Response): void {
-		const {
-			code,
-			name,
-			cpf,
-			rg,
-			birth,
-			address,
-			zipcode,
-			email,
-			level,
-			isEpic,
-		} = request.body;
+		const { code, name, cpf, rg, birth, address, zipcode, email, isEpic } =
+			request.body;
 
 		const client = new Client(
 			code,
@@ -30,7 +20,7 @@ class UserController {
 			zipcode,
 			email,
 			new Date(),
-			level,
+			0,
 			isEpic,
 		);
 
