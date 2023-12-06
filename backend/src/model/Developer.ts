@@ -1,11 +1,11 @@
 export class Developer {
-	private readonly _code: number;
+	private _code: number;
 	private _cnpj: string;
 	private _name: string;
 	private _email: string;
 	private _site: string;
 	private _socialNetwork: string;
-	private readonly _address: string;
+	private _address: string;
 
 	constructor(
 		code: number,
@@ -26,11 +26,11 @@ export class Developer {
 	}
 
 	get code(): number {
-		return this.code;
+		return this._code;
 	}
 
 	set code(value: number) {
-		this.code = value;
+		this._code = value;
 	}
 
 	get name(): string {
@@ -78,7 +78,7 @@ export class Developer {
 	}
 
 	set address(value: string) {
-		this.address = value;
+		this._address = value;
 	}
 
 	public toString(): string {

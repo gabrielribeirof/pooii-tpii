@@ -3,7 +3,7 @@ import { api } from "../../../services/api";
 import { Card } from "../../../components/Card";
 
 async function getDevelopers() {
-	const response = await api.get("/developer/developerListing");
+	const response = await api.get("/developers");
 
 	return response.data as [
 		{
