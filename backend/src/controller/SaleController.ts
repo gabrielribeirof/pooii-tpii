@@ -46,8 +46,6 @@ class SaleController {
 			(client) => client.code === Number(clientCode),
 		);
 
-		console.log("client");
-
 		if (!client) {
 			response.status(400).json();
 			return;
