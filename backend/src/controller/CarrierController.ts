@@ -9,12 +9,12 @@ class CarrierController {
 			request.body;
 
 		const carrier = new Carrier(
-			code,
+			Number(code),
 			cnpj,
 			name,
 			email,
 			phone,
-			deliveryTime,
+			Number(deliveryTime),
 			address,
 		);
 

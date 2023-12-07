@@ -11,7 +11,7 @@ class UserController {
 			request.body;
 
 		const client = new Client(
-			code,
+			Number(code),
 			name,
 			cpf,
 			rg,
@@ -44,17 +44,17 @@ class UserController {
 		} = request.body;
 
 		const manager = new Manager(
-			code,
+			Number(code),
 			name,
 			cpf,
 			rg,
-			birth,
+			new Date(birth),
 			address,
 			zipcode,
 			email,
-			salary,
+			Number(salary),
 			pis,
-			admissionDate,
+			new Date(admissionDate),
 		);
 
 		EletronicGamesSystem.managers.push(manager);

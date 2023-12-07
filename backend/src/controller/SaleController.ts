@@ -81,7 +81,7 @@ class SaleController {
 		}
 
 		const sale = new Sale(
-			code,
+			Number(code),
 			client,
 			manager,
 			new Date(dateSale),

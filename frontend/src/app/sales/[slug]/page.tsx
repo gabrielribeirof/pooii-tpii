@@ -150,7 +150,13 @@ export default function ListSales({
 
 	return (
 		<div className={styles.container}>
-			{data?.map((value) => (
+			{data?.map((value) => {
+				const games = value._saleItems.map((value, index) => ({
+					label: `Jogo ${index + 1}`,
+					withoutLabel: true,
+					value: `Código: ${value._codeProduct} | Quantidade: ${value._quantity} | Preço: ${value._price}`,
+				}));
+			return (
 				<Card
 					key={value._code}
 					properties={[
@@ -173,10 +179,10 @@ export default function ListSales({
 							label: ":::Jogos::",
 							value: "",
 						},
-						// { label: "Jogos", value: value._saleItems[]._codeProduct },
+						...games,
 					]}
 				/>
-			))}
+			)})}
 		</div>
 	);
 }

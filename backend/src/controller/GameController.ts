@@ -40,14 +40,14 @@ class GameController {
 
 		const game = FactoryGame.factoryMethod(
 			gameType,
-			code,
+			Number(code),
 			name,
 			description,
 			developer,
 			new Date(dateNew),
-			price,
+			Number(price),
 			requirimentMin,
-			avaliable,
+			avaliable === 'true',
 		);
 
 		EletronicGamesSystem.games.push(game);

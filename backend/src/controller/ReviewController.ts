@@ -11,6 +11,8 @@ class ReviewController {
 			(client) => client.code === Number(clientCode),
 		);
 
+		console.log(EletronicGamesSystem)
+
 		if (!client) {
 			response.status(400).json();
 			return;
