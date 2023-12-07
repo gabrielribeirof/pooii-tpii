@@ -10,7 +10,7 @@ class DeveloperController {
 			request.body;
 
 		const developer = new Developer(
-			code,
+			Number(code),
 			cnpj,
 			name,
 			email,
