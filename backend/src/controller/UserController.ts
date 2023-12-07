@@ -20,7 +20,7 @@ class UserController {
 			zipcode,
 			email,
 			new Date(),
-			isEpic,
+			isEpic === 'true',
 		);
 
 		EletronicGamesSystem.clients.push(client);
