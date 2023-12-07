@@ -27,27 +27,23 @@ class SaleController {
 			codeProduct: number;
 		}>;
 
-		const paymentTyped = payment as object;
 		let paymentInstance: Payment;
 
-		if (paymentTyped instanceof Pix) {
-			paymentInstance = new Pix(paymentTyped.codeNote, paymentTyped.pixCode);
-		} else if (paymentTyped instanceof Card) {
+		if (payment.pixCode) {
+			paymentInstance = new Pix(payment.codeNote, payment.pixCode);
+		} else if (payment.flag) {
 			paymentInstance = new Card(
-				paymentTyped.codeNote,
-				paymentTyped.flag,
-				paymentTyped.name,
-				paymentTyped.number,
+				payment.codeNote,
+				payment.flag,
+				payment.name,
+				payment.number,
 			);
-		} else if (paymentTyped instanceof Receipt) {
-			paymentInstance = new Receipt(paymentTyped.codeNote);
 		} else {
-			response.status(400).json();
-			return;
+			paymentInstance = new Receipt(payment.codeNote);
 		}
 
 		const client = EletronicGamesSystem.clients.find(
-			(client) => client.code === clientCode,
+			(client) => client.code === Number(clientCode),
 		);
 
 		if (!client) {
