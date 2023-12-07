@@ -32,15 +32,15 @@ export default function CreateClient() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<Input {...register("code")} label="Código" required />
+			<Input {...register("code")} label="Código" required type="number" />
 
 			<Input {...register("name")} label="Nome" required />
 
 			<Input {...register("email")} label="E-mail" required />
 
-			<Input {...register("cpf")} label="CPF" required />
+			<Input {...register("cpf")} label="CPF" required type="number" />
 
-			<Input {...register("rg")} label="RG" required />
+			<Input {...register("rg")} label="RG" required type="number" />
 
 			<Input
 				{...register("birth")}

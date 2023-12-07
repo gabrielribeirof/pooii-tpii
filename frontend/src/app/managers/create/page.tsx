@@ -34,15 +34,15 @@ export default function CreateManager() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<Input {...register("code")} label="Código" required />
+			<Input {...register("code")} label="Código" required type="number" />
 
 			<Input {...register("name")} label="Nome" required />
 
 			<Input {...register("email")} label="E-mail" required />
 
-			<Input {...register("cpf")} label="CPF" required />
+			<Input {...register("cpf")} label="CPF" required type="number" />
 
-			<Input {...register("rg")} label="RG" required />
+			<Input {...register("rg")} label="RG" required type="number" />
 
 			<Input
 				{...register("birth")}
@@ -53,11 +53,11 @@ export default function CreateManager() {
 
 			<Input {...register("address")} label="Endereço" required />
 
-			<Input {...register("zipcode")} label="CEP" required />
+			<Input {...register("zipcode")} label="CEP" required type="number" />
 
 			<Input {...register("salary")} label="Salário" type="number" required />
 
-			<Input {...register("pis")} label="PIS" required />
+			<Input {...register("pis")} label="PIS" required type="number" />
 
 			<Input
 				{...register("admissionDate")}

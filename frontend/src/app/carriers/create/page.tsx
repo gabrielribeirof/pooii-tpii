@@ -30,15 +30,15 @@ export default function CreateCarrier() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<Input {...register("code")} label="Código" required />
+			<Input {...register("code")} label="Código" required type="number" />
 
 			<Input {...register("name")} label="Nome" required />
 
 			<Input {...register("email")} label="E-mail" required />
 
-			<Input {...register("cnpj")} label="CNPJ" required />
+			<Input {...register("cnpj")} label="CNPJ" required type="number" />
 
-			<Input {...register("phone")} label="Telefone" required />
+			<Input {...register("phone")} label="Telefone" required type="number" />
 
 			<Input
 				{...register("deliveryTime")}

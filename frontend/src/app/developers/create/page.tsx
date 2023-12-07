@@ -30,9 +30,9 @@ export default function CreateDeveloper() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<Input {...register("code")} label="Code" required />
+			<Input {...register("code")} label="Code" required type="number" />
 
-			<Input {...register("cnpj")} label="CNPJ" required />
+			<Input {...register("cnpj")} label="CNPJ" required type="number" />
 
 			<Input {...register("name")} label="Nome" required />
 
