@@ -1,34 +1,55 @@
 import { Card } from "../components/Card";
+import { api } from "../services/api";
 
 import styles from "./page.module.css";
 
-export default function Home() {
+async function getGames() {
+	const response = await api.get("/games");
+
+	return response.data as [
+		{
+			_code: string;
+			_name: string;
+			_description: string;
+			_developer: {
+				_code: number;
+				_cnpj: string;
+				_name: string;
+				_email: string;
+				_site: string;
+				_socialNetwork: string;
+				_address: string;
+			};
+			_price: string;
+			_note: number;
+			_quantityReviews: number;
+			taxRate: number;
+		},
+	];
+}
+
+export default async function Home() {
+	const data = await getGames();
 	return (
 		<div className={styles.container}>
-			{Array(10)
-				.fill(0)
-				.map((value) => (
-					<Card
-						key={value}
-						imageSrc="s"
-						properties={[
-							{ label: "Name", value: "Oi" },
-							{
-								label: "Descrição",
-								value:
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dapibus porttitor consectetur. Suspendisse auctor lacinia nisl, sed malesuada nunc auctor non",
-							},
-							{
-								label: "Desenvolvedora",
-								value: "Rockstar",
-							},
-							{
-								label: "Preço",
-								value: "R$ 20,00",
-							},
-						]}
-					/>
-				))}
+			{data?.map((value) => (
+				<Card
+					key={value._code}
+					properties={[
+						{ label: "Código", value: value._code.toString() },
+						{ label: "Nome", value: value._name },
+						{ label: "Descrição", value: value._description },
+						{ label: "Desenvolvedora", value: value._developer._name },
+						// { label: "Data de Lançamento", value: value._ },
+						{ label: "Preço", value: value._price },
+						{ label: "Nota", value: value._note.toString() },
+						{
+							label: "Quantidade de avaliações",
+							value: value._quantityReviews.toString(),
+						},
+					]}
+				/>
+			))}
 		</div>
 	);
 }

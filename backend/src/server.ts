@@ -12,7 +12,7 @@ import { Developer } from "./model/Developer";
 import { Carrier } from "./model/Carrier";
 import { Manager } from "./model/Manager";
 import { Client } from "./model/Client";
-import { Review } from "./model/Review";
+// import { Review } from "./model/Review";
 import { Action } from "./model/Action";
 
 const app = express();
@@ -83,18 +83,17 @@ EletronicGamesSystem.clients.push(
 		"12345678",
 		"maria@email.com",
 		new Date("2021-01-01"),
-		1,
 		false,
 	),
 );
-EletronicGamesSystem.reviews.push(
+/* EletronicGamesSystem.reviews.push(
 	new Review(
 		5,
 		"Comentário 1",
 		EletronicGamesSystem.clients[0],
 		EletronicGamesSystem.games[0],
 	),
-);
+); */
 
 app.post("/users/clients", UserController.addClient);
 app.post("/users/managers", UserController.addManager);

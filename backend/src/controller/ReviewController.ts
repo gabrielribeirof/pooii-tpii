@@ -8,7 +8,7 @@ class ReviewController {
 		const { note, comment, clientCode, gameCode } = request.body;
 
 		const client = EletronicGamesSystem.clients.find(
-			(client) => client.code === clientCode,
+			(client) => client.code === Number(clientCode),
 		);
 
 		if (!client) {
@@ -18,8 +18,14 @@ class ReviewController {
 
 		client.level += 0.5;
 
+		let index = EletronicGamesSystem.clients.findIndex(
+			(client) => client.code === Number(clientCode),
+		);
+
+		EletronicGamesSystem.clients[index] = client;
+
 		const game = EletronicGamesSystem.games.find(
-			(game) => game.code === gameCode,
+			(game) => game.code === Number(gameCode),
 		);
 
 		if (!game) {
@@ -27,11 +33,19 @@ class ReviewController {
 			return;
 		}
 
-		game.quantityReviews++;
-
-		const review = new Review(note, comment, client, game);
+		const review = new Review(Number(note), comment, client, game);
 
 		EletronicGamesSystem.reviews.push(review);
+
+		game.quantityReviews++;
+
+		console.log("Nota: " + game.calculateNote());
+
+		index = EletronicGamesSystem.games.findIndex(
+			(game) => game.code === Number(gameCode),
+		);
+
+		EletronicGamesSystem.games[index] = game;
 
 		response.status(201).json(review);
 	}

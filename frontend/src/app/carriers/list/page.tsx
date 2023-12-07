@@ -28,7 +28,7 @@ export default async function ListCarriers() {
 					key={value._code}
 					properties={[
 						{ label: "Código", value: value._code.toString() },
-						{ label: "Name", value: value._name },
+						{ label: "Nome", value: value._name },
 						{ label: "CNPJ", value: value._cnpj },
 						{ label: "E-mail", value: value._email },
 						{ label: "Telefone", value: value._phone },

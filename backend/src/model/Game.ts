@@ -31,8 +31,8 @@ export abstract class Game {
 		this._developer = developer;
 		this._dateNew = dateNew;
 		this._price = price;
-		this._note = this.calculateNote();
 		this._quantityReviews = 0;
+		this._note = this.calculateNote();
 		this._requirimentMin = requirimentMin;
 		this._avaliable = avaliable;
 	}
@@ -86,7 +86,7 @@ export abstract class Game {
 	}
 
 	get note(): number {
-		return this._note;
+		return this.calculateNote();
 	}
 
 	set note(value: number) {
@@ -99,6 +99,7 @@ export abstract class Game {
 
 	set quantityReviews(value: number) {
 		this._quantityReviews = value;
+		this._note = this.calculateNote();
 	}
 
 	get requirimentMin(): string {
@@ -131,8 +132,11 @@ export abstract class Game {
 		const it = new Iterator(EletronicGamesSystem.reviews);
 		let note: number = 0;
 		while (it.hasNext()) {
-			if (it.current().game.code === this._code) note += it.next().note;
+			if (it.current().game.code === this._code) {
+				note += it.next().note;
+			}
 		}
-		return note / this._quantityReviews;
+		if (this._quantityReviews === 0) return 0;
+		else return note / this._quantityReviews;
 	}
 }

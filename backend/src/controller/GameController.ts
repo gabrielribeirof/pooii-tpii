@@ -23,14 +23,12 @@ class GameController {
 			developerCode,
 			dateNew,
 			price,
-			note,
 			requirimentMin,
-			comment,
 			avaliable,
 		} = request.body;
 
 		const developer = EletronicGamesSystem.developers.find(
-			(developer) => developer.code === developerCode,
+			(developer) => developer.code === Number(developerCode),
 		);
 
 		if (!developer) {
@@ -44,11 +42,9 @@ class GameController {
 			name,
 			description,
 			developer,
-			dateNew,
+			new Date(dateNew),
 			price,
-			note,
 			requirimentMin,
-			comment,
 			avaliable,
 		);
 

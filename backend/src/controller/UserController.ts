@@ -20,7 +20,6 @@ class UserController {
 			zipcode,
 			email,
 			new Date(),
-			0,
 			isEpic,
 		);
 
@@ -74,11 +73,9 @@ class UserController {
 				response.status(200).json(EletronicGamesSystem.managers);
 				break;
 			case "epic":
-				console.log(this);
 				response.status(200).json(this.userListingEpic());
 				break;
 			case "level":
-				console.log(this);
 				response.status(200).json(this.userListingLevel());
 				break;
 			default:
@@ -104,8 +101,6 @@ class UserController {
 				EletronicGamesSystem.clients.length - 10,
 				EletronicGamesSystem.clients.length,
 			);
-
-		console.log(d);
 		return d;
 	}
 }

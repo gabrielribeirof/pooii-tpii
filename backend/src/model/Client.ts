@@ -15,12 +15,11 @@ export class Client extends User {
 		zipcode: string,
 		email: string,
 		registerDate: Date,
-		level: number,
 		isEpic: boolean,
 	) {
 		super(code, name, cpf, rg, birth, address, zipcode, email);
 		this._registerDate = registerDate;
-		this._level = level;
+		this._level = 0;
 		this._isEpic = isEpic;
 	}
 

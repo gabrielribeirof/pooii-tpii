@@ -47,7 +47,7 @@ export default async function ListClients({
 					key={value._code}
 					properties={[
 						{ label: "Código", value: value._code.toString() },
-						{ label: "Name", value: value._name },
+						{ label: "Nome", value: value._name },
 						{ label: "E-mail", value: value._email },
 						{ label: "CPF", value: value._cpf },
 						{ label: "RG", value: value._rg },

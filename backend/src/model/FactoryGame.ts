@@ -15,9 +15,7 @@ export class FactoryGame {
 		developer: Developer,
 		dateNew: Date,
 		price: number,
-		note: number,
 		requirimentMin: string,
-		comment: string,
 		avaliable: boolean,
 	): Game {
 		switch (gameType) {

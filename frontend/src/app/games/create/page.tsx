@@ -13,7 +13,7 @@ interface FormData {
 	gameType: string;
 	name: string;
 	description: string;
-	developer: string;
+	developerCode: string;
 	price: string;
 	available: string;
 }
@@ -40,8 +40,13 @@ export default function CreateGames() {
 		void go();
 	}, []);
 
-	function onSubmit(data: FormData) {
-		console.log(data);
+	async function onSubmit(data: FormData) {
+		try {
+			await api.post("/games", data);
+			alert("Cadastrado com sucesso");
+		} catch (error) {
+			alert("Erro ao cadatrar");
+		}
 	}
 
 	return (
@@ -73,7 +78,7 @@ export default function CreateGames() {
 			<Input {...register("description")} label="Description" required />
 
 			<Controller
-				name="developer"
+				name="developerCode"
 				control={control}
 				render={({ field }) => (
 					<SelectInput
