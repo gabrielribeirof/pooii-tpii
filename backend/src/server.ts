@@ -174,8 +174,8 @@ app.use("*", (_, response) =>
 	}),
 );
 
-app.listen(3002, () => {
-	console.log("Backend rodando em http://localhost:3002");
+app.listen(3003, () => {
+	console.log("Backend rodando em http://localhost:3003");
 });
 
 const save = (): void => {
