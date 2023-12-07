@@ -79,7 +79,7 @@ class SaleController {
 			code,
 			client,
 			manager,
-			dateSale,
+			new Date(dateSale),
 			hasPhysicalProduct,
 			paymentInstance,
 			carrier,

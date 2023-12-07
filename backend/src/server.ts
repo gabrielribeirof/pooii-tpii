@@ -14,6 +14,8 @@ import { Manager } from "./model/Manager";
 import { Client } from "./model/Client";
 // import { Review } from "./model/Review";
 import { Action } from "./model/Action";
+import { Sale } from "./model/Sale";
+import { Pix } from "./model/Pix";
 
 const app = express();
 
@@ -94,6 +96,17 @@ EletronicGamesSystem.clients.push(
 		EletronicGamesSystem.games[0],
 	),
 ); */
+EletronicGamesSystem.sales.push(
+	new Sale(
+		1,
+		EletronicGamesSystem.clients[0],
+		EletronicGamesSystem.managers[0],
+		new Date(),
+		true,
+		new Pix("1", "123"),
+		EletronicGamesSystem.carriers[0],
+	),
+);
 
 app.post("/users/clients", UserController.addClient);
 app.post("/users/managers", UserController.addManager);

@@ -3,7 +3,7 @@ export class Iterator<T> {
 	private position: number = 0;
 
 	constructor(array: T[]) {
-		this.array = array;
+		this.array = array || [];
 	}
 
 	// Return the current element.

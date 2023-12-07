@@ -5,8 +5,6 @@ import { Card } from "../../../components/Card";
 async function getManagers() {
 	const response = await api.get("/reviews");
 
-	console.log(response.data);
-
 	return response.data as [
 		{
 			_note: number;
