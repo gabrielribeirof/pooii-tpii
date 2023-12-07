@@ -1,6 +1,7 @@
 import styles from "../../page.module.css";
 import { api } from "../../../services/api";
 import { Card } from "../../../components/Card";
+import { parseDate } from "../../../services/parseDate";
 
 async function getSales() {
 	const response = await api.get("/sales");
@@ -51,7 +52,7 @@ async function getSales() {
 			_hasPhysicalProduct: true;
 			_totalPrice: number;
 			_priceDiscount: number;
-			_saleItems: [];
+			_saleItems: {_price: number, _quantity: number, _codeProduct: number}[] ;
 		},
 	];
 }
@@ -64,7 +65,24 @@ export default async function ListSales() {
 			{data?.map((value) => (
 				<Card
 					key={value._code}
-					properties={[{ label: "Cliente", value: value._client._name }]}
+					properties={[
+						{ label: "Cliente", value: value._client._name },
+						{ label: "Gerente", value: value._manager._name },
+						{
+							label: "Data da venda",
+							value: parseDate(new Date(value._dateSale)),
+						},
+						{ label: "Transportadora", value: value._carrier._name },
+						{
+							label: "Data da entrega",
+							value: parseDate(new Date(value._dateDelivery)),
+						},
+						{
+							label: "Valor da compra",
+							value: value._priceDiscount.toString(),
+						},
+						{ label: "Jogos", value: value._saleItems[]._codeProduct },
+					]}
 				/>
 			))}
 		</div>
