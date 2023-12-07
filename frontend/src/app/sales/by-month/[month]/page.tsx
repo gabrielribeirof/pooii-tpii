@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import styles from "../../../page.module.css";
 import { api } from "../../../../services/api";
 import { parseDate } from "../../../../services/parseDate";
@@ -33,23 +38,60 @@ async function getSales(month: string) {
 	};
 }
 
-export default async function ListSales({
+export default function ListSales({
 	params,
 }: {
 	params: {
 		month: string;
 	};
 }) {
-	const data = await getSales(params.month);
+	const [month, setMonth] = useState(params.month);
+
+	const [data, setData] = useState<{
+		salesMonth: Array<{
+			_code: number;
+			_client: { _name: string };
+			_manager: { _name: string };
+			_dateSale: string;
+			_dateDelivery: string;
+			_carrier: { _name: string };
+			_hasPhysicalProduct: boolean;
+			_totalPrice: number;
+			_priceDiscount: number;
+			_saleItems: Array<{
+				_quantity: number;
+				_codeProduct: number;
+				_price: number;
+			}>;
+		}>;
+		profit: number;
+	}>();
+	const router = useRouter();
+
+	useEffect(() => {
+		async function loadSales() {
+			const data = await getSales(params.month);
+
+			setData(data);
+		}
+
+		void loadSales();
+	}, [params.month]);
 
 	return (
 		<div className={styles.container}>
 			<div>
-				<h3>Lucro no mês: {data.profit}</h3>
+				<h3>Lucro no mês: {data?.profit}</h3>
 
-				<MonthSelector monthSelect={params.month} />
+				<MonthSelector
+					value={month}
+					onChange={(value) => {
+						router.push(`/sales/by-month/${value}`);
+						setMonth(String(value));
+					}}
+				/>
 			</div>
-			{data.salesMonth.map((value) => {
+			{data?.salesMonth.map((value) => {
 				const games = value._saleItems.map((value, index) => ({
 					label: `Jogo ${index + 1}`,
 					withoutLabel: true,

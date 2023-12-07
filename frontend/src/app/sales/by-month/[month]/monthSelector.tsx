@@ -1,16 +1,18 @@
 "use client";
 
-import { useState } from "react";
-
 import { SelectInput } from "../../../../components/SelectInput";
 
-export function MonthSelector({ monthSelect }: { monthSelect: string }) {
-	const [month, setMonth] = useState<string | undefined>(monthSelect);
-
+export function MonthSelector({
+	value,
+	onChange,
+}: {
+	value?: string;
+	onChange: (value: string | undefined) => void;
+}) {
 	return (
 		<SelectInput
-			value={month}
-			onChange={setMonth}
+			value={value}
+			onChange={onChange}
 			label="Selecione o mês"
 			options={[
 				{ value: "1", label: "1" },
