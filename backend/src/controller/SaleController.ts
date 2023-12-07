@@ -8,6 +8,7 @@ import { type Payment } from "../model/Payment";
 import { Card } from "../model/Card";
 import { Receipt } from "../model/Receipt";
 import { Iterator } from "../util/Iterator";
+import { type Game } from "../model/Game";
 
 class SaleController {
 	public addSale(request: Request, response: Response): void {
@@ -30,16 +31,19 @@ class SaleController {
 		let paymentInstance: Payment;
 
 		if (payment.pixCode) {
-			paymentInstance = new Pix(payment.codeNote, payment.pixCode);
+			paymentInstance = new Pix(
+				String(payment.codeNote),
+				String(payment.pixCode),
+			);
 		} else if (payment.flag) {
 			paymentInstance = new Card(
-				payment.codeNote,
-				payment.flag,
-				payment.name,
-				payment.number,
+				String(payment.codeNote),
+				String(payment.flag),
+				String(payment.name),
+				String(payment.number),
 			);
 		} else {
-			paymentInstance = new Receipt(payment.codeNote);
+			paymentInstance = new Receipt(String(payment.codeNote));
 		}
 
 		const client = EletronicGamesSystem.clients.find(
@@ -88,7 +92,9 @@ class SaleController {
 		);
 
 		for (const saleItem of saleItemsTyped) {
-			sale.addSaleItem(new SaleItem(saleItem.quantity, saleItem.codeProduct));
+			sale.addSaleItem(
+				new SaleItem(Number(saleItem.quantity), Number(saleItem.codeProduct)),
+			);
 		}
 		EletronicGamesSystem.sales.push(sale);
 
@@ -102,6 +108,8 @@ class SaleController {
 	public saleListingByPayment(request: Request, response: Response): void {
 		const { paymentType } = request.query;
 
+		console.log(paymentType);
+
 		switch (paymentType) {
 			case "receipt":
 				response.status(201).json(this.saleListingReceipt());
@@ -109,7 +117,7 @@ class SaleController {
 			case "pix":
 				response.status(201).json(this.saleListingPix());
 				break;
-			case "Card":
+			case "card":
 				response.status(201).json(this.saleListingCard());
 				break;
 		}
@@ -119,7 +127,11 @@ class SaleController {
 		const it = new Iterator(EletronicGamesSystem.sales);
 		const salesTyped: Sale[] = [];
 		while (it.hasNext()) {
-			if (it.current() instanceof Receipt) salesTyped.push(it.next());
+			if (it.current().payment instanceof Receipt) {
+				salesTyped.push(it.next());
+			} else {
+				it.next();
+			}
 		}
 		return salesTyped;
 	}
@@ -128,7 +140,10 @@ class SaleController {
 		const it = new Iterator(EletronicGamesSystem.sales);
 		const salesTyped: Sale[] = [];
 		while (it.hasNext()) {
-			if (it.current() instanceof Pix) salesTyped.push(it.next());
+			if (it.current().payment instanceof Pix) salesTyped.push(it.next());
+			else {
+				it.next();
+			}
 		}
 		return salesTyped;
 	}
@@ -137,14 +152,17 @@ class SaleController {
 		const it = new Iterator(EletronicGamesSystem.sales);
 		const salesTyped: Sale[] = [];
 		while (it.hasNext()) {
-			if (it.current() instanceof Card) salesTyped.push(it.next());
+			if (it.current().payment instanceof Card) salesTyped.push(it.next());
+			else {
+				it.next();
+			}
 		}
 		return salesTyped;
 	}
 
 	public saleListingMonth(request: Request, response: Response): void {
 		const { month } = request.query;
-		const monthParsed = parseInt(String(month));
+		const monthParsed = parseInt(String(month)) - 1;
 		const it = new Iterator(EletronicGamesSystem.sales);
 		const salesMonth: Sale[] = [];
 		let profit: number = 0;
@@ -152,6 +170,28 @@ class SaleController {
 			if (it.current().dateSale.getMonth() === monthParsed) {
 				salesMonth.push(it.current());
 				profit += it.next().priceDiscount;
+			} else {
+				it.next();
+			}
+		}
+		response.status(201).json({
+			salesMonth,
+			profit,
+		});
+	}
+
+	public saleListingByClient(request: Request, response: Response): void {
+		const { clientCode } = request.query;
+		const clientCodeParsed = parseInt(String(clientCode));
+		const it = new Iterator(EletronicGamesSystem.sales);
+		const salesMonth: Sale[] = [];
+		let profit: number = 0;
+		while (it.hasNext()) {
+			if (it.current().client.code === clientCodeParsed) {
+				salesMonth.push(it.current());
+				profit += it.next().priceDiscount;
+			} else {
+				it.next();
 			}
 		}
 		response.status(201).json({
@@ -168,23 +208,36 @@ class SaleController {
 		const salesMonth: Sale[] = [];
 		let profit: number = 0;
 		while (itSale.hasNext()) {
-			const itItem = new Iterator(itSale.current().saleItems);
-			const game = EletronicGamesSystem.games.find(
-				(game) => game.code === itItem.next().codeProduct,
-			);
+			if (itSale.current().dateSale.getMonth() + 1 !== monthParsed) {
+				itSale.next();
+				continue;
+			}
 
-			if (!game) {
+			const itemsCode = itSale
+				.current()
+				.saleItems.map((saleItem) => saleItem.codeProduct);
+
+			const games: Game[] = [];
+
+			itemsCode.forEach((code) => {
+				const game = EletronicGamesSystem.games.find(
+					(game) =>
+						game.code === code && game.developer.code === developerCodeParsed,
+				);
+
+				if (game) {
+					games.push(game);
+				}
+			});
+
+			if (!games.length) {
 				response.status(400).json();
 				return;
 			}
 
-			if (
-				itSale.current().dateSale.getMonth() === monthParsed &&
-				game.developer.code === developerCodeParsed
-			) {
-				salesMonth.push(itSale.current());
-				profit += game.price;
-			}
+			salesMonth.push(itSale.next());
+
+			profit += games.reduce((acc, game) => acc + game.price, 0);
 		}
 		response.status(201).json({
 			salesMonth,

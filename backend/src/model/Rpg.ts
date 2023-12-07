@@ -41,4 +41,6 @@ export class Rpg extends Game {
 	public toJSON(): string {
 		return JSON.stringify(this);
 	}
+
+	private readonly isRpG: boolean = true;
 }

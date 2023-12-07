@@ -14,8 +14,8 @@ export class Sale {
 	private _dateDelivery: Date;
 	private readonly _saleItems: SaleItem[];
 	private _hasPhysicalProduct: boolean;
-	private readonly _totalPrice: number;
-	private readonly _priceDiscount: number;
+	private _totalPrice: number;
+	private _priceDiscount: number;
 	private _payment: Payment;
 	private readonly _carrier: Carrier;
 
@@ -139,5 +139,7 @@ export class Sale {
 
 	public addSaleItem(item: SaleItem): void {
 		this._saleItems.push(item);
+		this._totalPrice = this.calculateTotalPrice();
+		this._priceDiscount = this.calculatePriceDiscount();
 	}
 }

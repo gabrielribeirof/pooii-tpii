@@ -6,9 +6,9 @@ export class SaleItem {
 	private _codeProduct: number;
 
 	constructor(quantity: number, codeProduct: number) {
-		this._price = this.calculateTotalPrice();
 		this._quantity = quantity;
 		this._codeProduct = codeProduct;
+		this._price = this.calculateTotalPrice();
 	}
 
 	get price(): number {
@@ -44,7 +44,10 @@ export class SaleItem {
 			(game) => game.code === this._codeProduct,
 		);
 
-		if (game) return this._quantity * game.price;
-		else return 0;
+		if (game) {
+			return this._quantity * game.price;
+		}
+
+		return 0;
 	}
 }

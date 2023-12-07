@@ -16,6 +16,7 @@ import { Client } from "./model/Client";
 import { Action } from "./model/Action";
 import { Sale } from "./model/Sale";
 import { Pix } from "./model/Pix";
+import { SaleItem } from "./model/SaleItem";
 
 const app = express();
 
@@ -85,7 +86,7 @@ EletronicGamesSystem.clients.push(
 		"12345678",
 		"maria@email.com",
 		new Date("2021-01-01"),
-		false,
+		true,
 	),
 );
 /* EletronicGamesSystem.reviews.push(
@@ -96,17 +97,17 @@ EletronicGamesSystem.clients.push(
 		EletronicGamesSystem.games[0],
 	),
 ); */
-EletronicGamesSystem.sales.push(
-	new Sale(
-		1,
-		EletronicGamesSystem.clients[0],
-		EletronicGamesSystem.managers[0],
-		new Date(),
-		true,
-		new Pix("1", "123"),
-		EletronicGamesSystem.carriers[0],
-	),
+const s = new Sale(
+	1,
+	EletronicGamesSystem.clients[0],
+	EletronicGamesSystem.managers[0],
+	new Date(),
+	true,
+	new Pix("1", "123"),
+	EletronicGamesSystem.carriers[0],
 );
+s.addSaleItem(new SaleItem(1, 1));
+EletronicGamesSystem.sales.push(s);
 
 app.post("/users/clients", UserController.addClient);
 app.post("/users/managers", UserController.addManager);
@@ -116,8 +117,12 @@ app.get("/users", (req, res) => {
 app.post("/games", GameController.addGame);
 app.post("/reviews", ReviewController.addReview);
 app.get("/reviews", ReviewController.ReviewListing);
-app.get("/games", GameController.gameListing);
-app.get("/games/ordered", GameController.gameListingOrdered);
+app.get("/games", (req, res) => {
+	GameController.gameListing(req, res);
+});
+app.get("/games/ordered", (req, res) => {
+	GameController.gameListingOrdered(req, res);
+});
 app.post("/developers", DeveloperController.addDeveloper);
 app.get("/developers", DeveloperController.developerListing);
 app.get(
@@ -128,10 +133,15 @@ app.get("/developers/by-profit", DeveloperController.developerListingByProfit);
 app.post("/carriers", CarrierController.addCarrier);
 app.get("/carriers", CarrierController.developerListing);
 app.post("/sales", SaleController.addSale);
-app.get("/sales", SaleController.saleListing);
-app.get("/sales/by-payment", SaleController.saleListingByPayment);
+app.get("/sales", (req, res) => {
+	SaleController.saleListing(req, res);
+});
+app.get("/sales/by-payment", (req, res) => {
+	SaleController.saleListingByPayment(req, res);
+});
 app.get("/sales/by-month", SaleController.saleListingMonth);
 app.get("/sales/by-month-per-dev", SaleController.saleListingMonthDev);
+app.get("/sales/by-clients", SaleController.saleListingByClient);
 
 app.use("*", (_, response) =>
 	response.status(404).json({

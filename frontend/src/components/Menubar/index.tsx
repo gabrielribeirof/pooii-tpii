@@ -94,9 +94,19 @@ export function Menubar() {
 						</NavigationMenu.Trigger>
 
 						<NavigationMenu.Content className={styles.navItemContent}>
-							<Link href="/sales/list">Listar vendas</Link>
-							<Link href="/sales/list-by-users">Listar vendas por usuário</Link>
-							<Link href="/sales/list-by-developers">
+							<Link href="/sales/all">Listar vendas</Link>
+							<Link href="/sales/by-month/1">
+								Listar vendas por mês e com lucro
+							</Link>
+							<Link href="/sales/list-by-card">
+								Listar vendas por cartão de crédito
+							</Link>
+							<Link href="/sales/list-by-pix">Listar vendas por PIX</Link>
+							<Link href="/sales/list-by-receipt">
+								Listar vendas por boleto
+							</Link>
+							<Link href="/sales/by-clients">Listar vendas por cliente</Link>
+							<Link href="/sales/by-developers/1">
 								Listar vendas por desenvolvedora
 							</Link>
 							<Link href="/sales/create">Cadastrar venda</Link>

@@ -37,4 +37,6 @@ export class Action extends Game {
 	public static fromJSON(json: string): Game {
 		return JSON.parse(json);
 	}
+
+	private readonly IsAction: boolean = true;
 }

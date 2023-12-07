@@ -82,7 +82,11 @@ class GameController {
 		const it = new Iterator(EletronicGamesSystem.games);
 		const gamesCategory: Game[] = [];
 		while (it.hasNext()) {
-			if (it.current() instanceof Action) gamesCategory.push(it.next());
+			if (it.current() instanceof Action) {
+				gamesCategory.push(it.next());
+			} else {
+				it.next();
+			}
 		}
 		return gamesCategory;
 	}
@@ -91,7 +95,11 @@ class GameController {
 		const it = new Iterator(EletronicGamesSystem.games);
 		const gamesCategory: Game[] = [];
 		while (it.hasNext()) {
-			if (it.current() instanceof Adventure) gamesCategory.push(it.next());
+			if (it.current() instanceof Adventure) {
+				gamesCategory.push(it.next());
+			} else {
+				it.next();
+			}
 		}
 		return gamesCategory;
 	}
@@ -100,7 +108,11 @@ class GameController {
 		const it = new Iterator(EletronicGamesSystem.games);
 		const gamesCategory: Game[] = [];
 		while (it.hasNext()) {
-			if (it.current() instanceof Rpg) gamesCategory.push(it.next());
+			if (it.current() instanceof Rpg) {
+				gamesCategory.push(it.next());
+			} else {
+				it.next();
+			}
 		}
 		return gamesCategory;
 	}
@@ -109,7 +121,11 @@ class GameController {
 		const it = new Iterator(EletronicGamesSystem.games);
 		const gamesCategory: Game[] = [];
 		while (it.hasNext()) {
-			if (it.current() instanceof Running) gamesCategory.push(it.next());
+			if (it.current() instanceof Running) {
+				gamesCategory.push(it.next());
+			} else {
+				it.next();
+			}
 		}
 		return gamesCategory;
 	}
@@ -118,7 +134,11 @@ class GameController {
 		const it = new Iterator(EletronicGamesSystem.games);
 		const gamesCategory: Game[] = [];
 		while (it.hasNext()) {
-			if (it.current() instanceof Sport) gamesCategory.push(it.next());
+			if (it.current() instanceof Sport) {
+				gamesCategory.push(it.next());
+			} else {
+				it.next();
+			}
 		}
 		return gamesCategory;
 	}
@@ -140,6 +160,7 @@ class GameController {
 				response.status(201).json(this.gameListingCheap());
 				break;
 			default:
+				response.status(400).send();
 				break;
 		}
 	}

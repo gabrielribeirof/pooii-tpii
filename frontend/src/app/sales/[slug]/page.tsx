@@ -1,12 +1,26 @@
+import { redirect } from "next/navigation";
+
 import styles from "../../page.module.css";
 import { api } from "../../../services/api";
 import { Card } from "../../../components/Card";
 import { parseDate } from "../../../services/parseDate";
 
-async function getSales() {
-	const response = await api.get("/sales");
-
-	console.log(response.data);
+async function getSales(
+	slug: "all" | "list-by-receipt" | "list-by-pix" | "list-by-card",
+) {
+	const response = await api.get(
+		slug === "all" ? "/sales" : "/sales/by-payment",
+		{
+			params: {
+				paymentType:
+					slug === "list-by-receipt"
+						? "receipt"
+						: slug === "list-by-pix"
+						? "pix"
+						: "card",
+			},
+		},
+	);
 
 	return response.data as [
 		{
@@ -40,7 +54,7 @@ async function getSales() {
 			_dateSale: string;
 			_dateDelivery: string;
 			_carrier: {
-				_code: 1;
+				_code: number;
 				_cnpj: string;
 				_name: string;
 				_email: string;
@@ -52,13 +66,31 @@ async function getSales() {
 			_hasPhysicalProduct: true;
 			_totalPrice: number;
 			_priceDiscount: number;
-			_saleItems: {_price: number, _quantity: number, _codeProduct: number}[] ;
+			_saleItems: Array<{
+				_price: number;
+				_quantity: number;
+				_codeProduct: number;
+			}>;
 		},
 	];
 }
 
-export default async function ListSales() {
-	const data = await getSales();
+export default async function ListSales({
+	params,
+}: {
+	params: {
+		slug: "all" | "list-by-receipt" | "list-by-pix" | "list-by-card";
+	};
+}) {
+	if (
+		!["all", "list-by-receipt", "list-by-pix", "list-by-card"].includes(
+			params.slug,
+		)
+	) {
+		redirect("/not-found");
+	}
+
+	const data = await getSales(params.slug);
 
 	return (
 		<div className={styles.container}>
@@ -81,7 +113,11 @@ export default async function ListSales() {
 							label: "Valor da compra",
 							value: value._priceDiscount.toString(),
 						},
-						{ label: "Jogos", value: value._saleItems[]._codeProduct },
+						{
+							label: ":::Jogos::",
+							value: "",
+						},
+						// { label: "Jogos", value: value._saleItems[]._codeProduct },
 					]}
 				/>
 			))}

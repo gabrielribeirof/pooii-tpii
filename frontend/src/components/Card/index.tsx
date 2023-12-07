@@ -4,7 +4,7 @@ import styles from "./card.module.css";
 
 interface CardProps {
 	imageSrc?: string;
-	properties: Array<{ label: string; value: string }>;
+	properties: Array<{ label: string; value: string; withoutLabel?: boolean }>;
 }
 
 export function Card(props: CardProps) {
@@ -21,7 +21,7 @@ export function Card(props: CardProps) {
 
 			{props.properties.map((property) => (
 				<div key={property.label} className={styles.info}>
-					<label>{property.label}: </label>
+					<label>{!property.withoutLabel && `${property.label}:`}</label>
 
 					<span>{property.value}</span>
 				</div>

@@ -37,4 +37,6 @@ export class Sport extends Game {
 	public static fromJSON(json: string): Game {
 		return JSON.parse(json);
 	}
+
+	private readonly isSport: boolean = true;
 }

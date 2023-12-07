@@ -6,6 +6,10 @@ export class Iterator<T> {
 		this.array = array || [];
 	}
 
+	public nextPosition(): number {
+		return this.position + 1;
+	}
+
 	// Return the current element.
 	public current(): T {
 		return this.array[this.position];

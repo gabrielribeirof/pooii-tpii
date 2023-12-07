@@ -37,4 +37,6 @@ export class Running extends Game {
 	public static fromJSON(json: string): Game {
 		return JSON.parse(json);
 	}
+
+	private readonly isRunning: boolean = true;
 }

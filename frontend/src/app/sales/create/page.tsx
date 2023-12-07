@@ -32,7 +32,7 @@ interface FormData {
 		| { codeNote: string; number: string };
 }
 
-export default function CreateSlae() {
+export default function CreateSale() {
 	const [clientOptions, setClientOptions] = useState<
 		Array<{ label: string; value: string }> | undefined
 	>(undefined);
@@ -63,6 +63,8 @@ export default function CreateSlae() {
 					},
 				},
 			);
+
+			console.log(response.data);
 
 			setClientOptions(
 				response.data.map((developer) => ({
@@ -122,11 +124,54 @@ export default function CreateSlae() {
 	}, [replace]);
 
 	async function onSubmit(data: FormData) {
+		if (paymentType === "pix") {
+			data.payment = {
+				codeNote: "1",
+				pixCode: (data.payment as { codeNote: string; pixCode: string })
+					.pixCode,
+			};
+		} else if (paymentType === "card") {
+			data.payment = {
+				codeNote: "1",
+				flag: (
+					data.payment as {
+						codeNote: string;
+						flag: string;
+						name: string;
+						number: string;
+					}
+				).flag,
+				name: (
+					data.payment as {
+						codeNote: string;
+						flag: string;
+						name: string;
+						number: string;
+					}
+				).name,
+				number: (
+					data.payment as {
+						codeNote: string;
+						flag: string;
+						name: string;
+						number: string;
+					}
+				).number,
+			};
+		} else if (paymentType === "receipt") {
+			data.payment = {
+				codeNote: "1",
+				number: (data.payment as { codeNote: string; number: string }).number,
+			};
+		}
+
+		console.log(data.payment);
+
 		try {
-			await api.post("/reviews", data);
+			await api.post("/sales", data);
 			alert("Cadastrado com sucesso");
 		} catch (error) {
-			alert("Erro ao cadatrar");
+			alert("Erro ao cadastrar");
 		}
 	}
 
@@ -207,25 +252,67 @@ export default function CreateSlae() {
 
 			<SelectInput
 				value={paymentType}
-				label="Tem produto físico?"
+				onChange={(value) => {
+					setPaymentType(value as undefined | "pix" | "card" | "receipt");
+				}}
+				label="Tipo de pagamento"
 				options={[
 					{ value: "pix", label: "Pix" },
 					{ value: "card", label: "Card" },
-					{ value: "card", label: "Card" },
+					{ value: "receipt", label: "Boleto" },
 				]}
 				required
 			/>
 
+			{paymentType === "pix" && (
+				<Input
+					{...register("payment.pixCode")}
+					label="Código pix"
+					type="text"
+					required
+				/>
+			)}
+
+			{paymentType === "card" && (
+				<>
+					<Input
+						{...register("payment.flag")}
+						label="Bandeira"
+						type="text"
+						required
+					/>
+					<Input
+						{...register("payment.name")}
+						label="Nome"
+						type="text"
+						required
+					/>
+					<Input
+						{...register("payment.number")}
+						label="Número"
+						type="text"
+						required
+					/>
+				</>
+			)}
+
+			{paymentType === "receipt" && (
+				<Input
+					{...register("payment.number")}
+					label="Número"
+					type="text"
+					required
+				/>
+			)}
+
 			<h2>Jogos da venda</h2>
 
 			{fields.map((field, index) => (
-				<>
-					<Input
-						key={field.id}
-						label={field.name}
-						{...register(`saleItems.${index}.quantity`)}
-					/>
-				</>
+				<Input
+					key={field.id}
+					label={field.name}
+					{...register(`saleItems.${index}.quantity`)}
+				/>
 			))}
 
 			<Button type="submit">Salvar</Button>
