@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import styles from "../../page.module.css";
 import { api } from "../../../services/api";
 import { Card } from "../../../components/Card";
@@ -8,8 +12,24 @@ async function getManagers() {
 		params: { userType: "manager" },
 	});
 
-	return response.data as [
-		{
+	return response.data as Array<{
+		_code: number;
+		_name: string;
+		_cpf: string;
+		_rg: string;
+		_birth: string;
+		_address: string;
+		_zipcode: string;
+		_email: string;
+		_salary: number;
+		_pis: string;
+		_admissionDate: string;
+	}>;
+}
+
+export default function ListManagers() {
+	const [data, setData] = useState<
+		Array<{
 			_code: number;
 			_name: string;
 			_cpf: string;
@@ -21,12 +41,14 @@ async function getManagers() {
 			_salary: number;
 			_pis: string;
 			_admissionDate: string;
-		},
-	];
-}
+		}>
+	>();
 
-export default async function ListManagers() {
-	const data = await getManagers();
+	useEffect(() => {
+		void getManagers().then((data) => {
+			setData(data);
+		});
+	}, []);
 
 	return (
 		<div className={styles.container}>

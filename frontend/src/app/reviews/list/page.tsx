@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import styles from "../../page.module.css";
 import { api } from "../../../services/api";
 import { Card } from "../../../components/Card";
@@ -5,8 +9,43 @@ import { Card } from "../../../components/Card";
 async function getManagers() {
 	const response = await api.get("/reviews");
 
-	return response.data as [
-		{
+	return response.data as Array<{
+		_note: number;
+		_comment: string;
+		_client: {
+			_code: number;
+			_name: string;
+			_cpf: string;
+			_rg: string;
+			_birth: string;
+			_address: string;
+			_zipcode: string;
+			_email: string;
+			_registerDate: string;
+			_level: number;
+			_isEpic: false;
+		};
+		_game: {
+			_code: number;
+			_name: string;
+			_description: string;
+			_developer: {
+				_name: string;
+			};
+			_dateNew: string;
+			_price: number;
+			_note: null;
+			_quantityReviews: number;
+			_requirimentMin: string;
+			_avaliable: true;
+			taxRate: number;
+		};
+	}>;
+}
+
+export default function ListManagers() {
+	const [data, setData] = useState<
+		Array<{
 			_note: number;
 			_comment: string;
 			_client: {
@@ -37,12 +76,14 @@ async function getManagers() {
 				_avaliable: true;
 				taxRate: number;
 			};
-		},
-	];
-}
+		}>
+	>();
 
-export default async function ListManagers() {
-	const data = await getManagers();
+	useEffect(() => {
+		void getManagers().then((data) => {
+			setData(data);
+		});
+	}, []);
 
 	return (
 		<div className={styles.container}>
