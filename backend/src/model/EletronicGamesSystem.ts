@@ -90,4 +90,17 @@ export class EletronicGamesSystem {
 	static set reviews(value: Review[]) {
 		this._reviews = value;
 	}
+
+	static get toJson(): string {
+		return JSON.stringify({
+			_platformName: this._platformName,
+			_sales: this._sales,
+			_games: this._games,
+			_developers: this._developers,
+			_carriers: this._carriers,
+			_clients: this._clients,
+			_managers: this._managers,
+			_reviews: this._reviews,
+		});
+	}
 }
