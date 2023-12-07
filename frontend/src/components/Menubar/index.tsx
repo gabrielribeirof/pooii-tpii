@@ -28,6 +28,7 @@ export function Menubar() {
 
 						<NavigationMenu.Content className={styles.navItemContent}>
 							<Link href="/games/create">Cadastrar jogo</Link>
+							<Link href="/games/ordereded">Listar ordenado</Link>
 							<Link href="/">Listar jogos</Link>
 						</NavigationMenu.Content>
 					</NavigationMenu.Item>
