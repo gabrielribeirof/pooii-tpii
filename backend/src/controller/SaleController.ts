@@ -46,6 +46,8 @@ class SaleController {
 			(client) => client.code === Number(clientCode),
 		);
 
+		console.log("client");
+
 		if (!client) {
 			response.status(400).json();
 			return;
@@ -54,7 +56,7 @@ class SaleController {
 		client.level += 1;
 
 		const manager = EletronicGamesSystem.managers.find(
-			(manager) => manager.code === managerCode,
+			(manager) => manager.code === Number(managerCode),
 		);
 
 		if (!manager) {
@@ -63,7 +65,7 @@ class SaleController {
 		}
 
 		const carrier = EletronicGamesSystem.carriers.find(
-			(carrier) => carrier.code === carrierCode,
+			(carrier) => carrier.code === Number(carrierCode),
 		);
 
 		if (!carrier) {
