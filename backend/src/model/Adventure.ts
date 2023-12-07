@@ -38,5 +38,5 @@ export class Adventure extends Game {
 		return JSON.parse(json);
 	}
 
-	private readonly isAdventure: boolean = true;
+	public readonly isAdventure: boolean = true;
 }

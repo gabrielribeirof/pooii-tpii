@@ -8,13 +8,13 @@ import { type Sale } from "./Sale";
 
 export class EletronicGamesSystem {
 	private static _platformName: string;
-	private static _sales: Sale[];
-	private static _games: Game[];
-	private static _developers: Developer[];
-	private static _carriers: Carrier[];
-	private static _clients: Client[];
-	private static _managers: Manager[];
-	private static _reviews: Review[];
+	private static _sales: Sale[] = [];
+	private static _games: Game[] = [];
+	private static _developers: Developer[] = [];
+	private static _carriers: Carrier[] = [];
+	private static _clients: Client[] = [];
+	private static _managers: Manager[] = [];
+	private static _reviews: Review[] = [];
 
 	constructor(platformName: string) {
 		EletronicGamesSystem._platformName = platformName;
@@ -93,14 +93,16 @@ export class EletronicGamesSystem {
 
 	static get toJson(): string {
 		return JSON.stringify({
-			_platformName: this._platformName,
-			_sales: this._sales,
-			_games: this._games,
-			_developers: this._developers,
-			_carriers: this._carriers,
-			_clients: this._clients,
-			_managers: this._managers,
-			_reviews: this._reviews,
+			_platformName: JSON.stringify(this._platformName),
+			_sales: JSON.stringify(this._sales),
+			_games: JSON.stringify(this._games),
+			_developers: JSON.stringify(this._developers),
+			_carriers: JSON.stringify(this._carriers),
+			_clients: JSON.stringify(this._clients),
+			_managers: JSON.stringify(JSON.stringify(this._managers)),
+			_reviews: JSON.stringify(this._reviews),
 		});
 	}
 }
+
+export default new EletronicGamesSystem("Eletronic Games System");

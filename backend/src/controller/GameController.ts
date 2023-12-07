@@ -31,6 +31,8 @@ class GameController {
 			(developer) => developer.code === Number(developerCode),
 		);
 
+		console.log(EletronicGamesSystem.developers)
+
 		if (!developer) {
 			response.status(400).json();
 			return;
