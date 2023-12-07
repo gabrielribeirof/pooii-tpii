@@ -1,4 +1,7 @@
+"use client";
+
 import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import styles from "../../page.module.css";
 import { api } from "../../../services/api";
@@ -12,8 +15,32 @@ async function getClients(type: "all" | "epic" | "level") {
 		},
 	});
 
-	return response.data as [
-		{
+	return response.data as Array<{
+		_code: number;
+		_name: string;
+		_cpf: string;
+		_rg: string;
+		_birth: string;
+		_address: string;
+		_zipcode: string;
+		_email: string;
+		_registerDate: string;
+		_level: number;
+		_isEpic: boolean;
+	}>;
+}
+
+export default function ListClients({
+	params,
+}: {
+	params: { slug: "all" | "epic" | "level" };
+}) {
+	if (!["all", "epic", "level"].includes(params.slug)) {
+		redirect("/not-found");
+	}
+
+	const [data, setData] = useState<
+		Array<{
 			_code: number;
 			_name: string;
 			_cpf: string;
@@ -25,20 +52,14 @@ async function getClients(type: "all" | "epic" | "level") {
 			_registerDate: string;
 			_level: number;
 			_isEpic: boolean;
-		},
-	];
-}
+		}>
+	>();
 
-export default async function ListClients({
-	params,
-}: {
-	params: { slug: "all" | "epic" | "level" };
-}) {
-	if (!["all", "epic", "level"].includes(params.slug)) {
-		redirect("/not-found");
-	}
-
-	const data = await getClients(params.slug);
+	useEffect(() => {
+		void getClients(params.slug).then((data) => {
+			setData(data);
+		});
+	}, [params.slug]);
 
 	return (
 		<div className={styles.container}>

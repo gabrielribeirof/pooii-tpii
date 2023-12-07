@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import styles from "../../page.module.css";
 import { api } from "../../../services/api";
 import { Card } from "../../../components/Card";
@@ -18,8 +22,24 @@ async function getCarriers() {
 	];
 }
 
-export default async function ListCarriers() {
-	const data = await getCarriers();
+export default function ListCarriers() {
+	const [data, setData] = useState<
+		Array<{
+			_code: number;
+			_cnpj: string;
+			_name: string;
+			_email: string;
+			_phone: string;
+			_deliveryTime: number;
+			_address: string;
+		}>
+	>();
+
+	useEffect(() => {
+		void getCarriers().then((data) => {
+			setData(data);
+		});
+	}, []);
 
 	return (
 		<div className={styles.container}>

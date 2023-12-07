@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import styles from "../../page.module.css";
 import { api } from "../../../services/api";
 import { Card } from "../../../components/Card";
@@ -5,8 +9,20 @@ import { Card } from "../../../components/Card";
 async function getDevelopers() {
 	const response = await api.get("/developers");
 
-	return response.data as [
-		{
+	return response.data as Array<{
+		_code: number;
+		_cnpj: string;
+		_name: string;
+		_email: string;
+		_site: string;
+		_socialNetwork: string;
+		_address: string;
+	}>;
+}
+
+export default function ListDevelopers() {
+	const [data, setData] = useState<
+		Array<{
 			_code: number;
 			_cnpj: string;
 			_name: string;
@@ -14,12 +30,14 @@ async function getDevelopers() {
 			_site: string;
 			_socialNetwork: string;
 			_address: string;
-		},
-	];
-}
+		}>
+	>();
 
-export default async function ListDevelopers() {
-	const data = await getDevelopers();
+	useEffect(() => {
+		void getDevelopers().then((data) => {
+			setData(data);
+		});
+	}, []);
 
 	return (
 		<div className={styles.container}>

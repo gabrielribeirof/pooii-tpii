@@ -20,6 +20,8 @@ interface FormData {
 	admissionDate: string;
 }
 
+export const revalidate = 10;
+
 export default function CreateManager() {
 	const { register, handleSubmit } = useForm<FormData>();
 

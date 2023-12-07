@@ -32,6 +32,7 @@ function loadFromFile(): void {
 	const data = fs.readFileSync("eletronicGamesSystem.json", "utf-8");
 
 	if (!data) {
+		console.log("Sem dados carregados");
 		return;
 	}
 
@@ -44,6 +45,7 @@ function loadFromFile(): void {
 	EletronicGamesSystem.clients = obj.clients;
 	EletronicGamesSystem.managers = obj.managers;
 	EletronicGamesSystem.reviews = obj.reviews;
+	console.log("Dados carregados");
 }
 
 loadFromFile();
@@ -174,8 +176,8 @@ app.use("*", (_, response) =>
 	}),
 );
 
-app.listen(3003, () => {
-	console.log("Backend rodando em http://localhost:3003");
+app.listen(3005, () => {
+	console.log("Backend rodando em http://localhost:3005");
 });
 
 const save = (): void => {
