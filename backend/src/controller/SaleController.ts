@@ -53,6 +53,12 @@ class SaleController {
 
 		client.level += 1;
 
+		const index = EletronicGamesSystem.clients.findIndex(
+			(client) => client.code === Number(clientCode),
+		);
+
+		EletronicGamesSystem.clients[index] = client;
+
 		const manager = EletronicGamesSystem.managers.find(
 			(manager) => manager.code === Number(managerCode),
 		);
