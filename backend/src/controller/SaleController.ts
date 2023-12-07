@@ -31,10 +31,7 @@ class SaleController {
 		let paymentInstance: Payment;
 
 		if (payment.pixCode) {
-			paymentInstance = new Pix(
-				String(payment.codeNote),
-				String(payment.pixCode),
-			);
+			paymentInstance = new Pix(String(payment.codeNote));
 		} else if (payment.flag) {
 			paymentInstance = new Card(
 				String(payment.codeNote),

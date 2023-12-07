@@ -3,9 +3,9 @@ import { Payment } from "./Payment";
 export class Pix extends Payment {
 	private _pixCode: string;
 
-	constructor(codeNote: string, pixCode: string) {
+	constructor(codeNote: string) {
 		super(codeNote);
-		this._pixCode = pixCode;
+		this._pixCode = "";
 	}
 
 	get pixCode(): string {
@@ -20,13 +20,13 @@ export class Pix extends Payment {
 		return JSON.stringify(this);
 	}
 
-	public generatePixCode(): string {
+	public generatePixCode(): void {
 		const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		let pixCode = "";
 		for (let i = 0; i < 10; i++) {
 			const randomIndex = Math.floor(Math.random() * characters.length);
 			pixCode += characters.charAt(randomIndex);
 		}
-		return pixCode;
+		this._pixCode = pixCode;
 	}
 }

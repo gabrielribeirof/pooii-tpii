@@ -103,7 +103,7 @@ const s = new Sale(
 	EletronicGamesSystem.managers[0],
 	new Date(),
 	true,
-	new Pix("1", "123"),
+	new Pix("1"),
 	EletronicGamesSystem.carriers[0],
 );
 s.addSaleItem(new SaleItem(1, 1));

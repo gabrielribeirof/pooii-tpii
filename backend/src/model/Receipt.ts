@@ -5,7 +5,7 @@ export class Receipt extends Payment {
 
 	constructor(codeNote: string) {
 		super(codeNote);
-		this._number = this.generateRandomReceiptNumber();
+		this._number = "";
 	}
 
 	get number(): string {
@@ -20,13 +20,13 @@ export class Receipt extends Payment {
 		return JSON.stringify(this);
 	}
 
-	public generateRandomReceiptNumber(): string {
+	public generateRandomReceiptNumber(): void {
 		const minNumber = 1000;
 		const maxNumber = 9999;
 
 		const randomNumber =
 			Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
 
-		return randomNumber.toString();
+		this._number = randomNumber.toString();
 	}
 }

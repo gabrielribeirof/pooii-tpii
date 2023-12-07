@@ -22,7 +22,7 @@ interface FormData {
 	}>;
 
 	payment:
-		| { codeNote: string; pixCode: string }
+		| { codeNote: string }
 		| {
 				codeNote: string;
 				flag: string;
@@ -127,12 +127,10 @@ export default function CreateSale() {
 		if (paymentType === "pix") {
 			data.payment = {
 				codeNote: "1",
-				pixCode: (data.payment as { codeNote: string; pixCode: string })
-					.pixCode,
 			};
 		} else if (paymentType === "card") {
 			data.payment = {
-				codeNote: "1",
+				codeNote: "2",
 				flag: (
 					data.payment as {
 						codeNote: string;
@@ -160,8 +158,7 @@ export default function CreateSale() {
 			};
 		} else if (paymentType === "receipt") {
 			data.payment = {
-				codeNote: "1",
-				number: (data.payment as { codeNote: string; number: string }).number,
+				codeNote: "3",
 			};
 		}
 
@@ -264,15 +261,6 @@ export default function CreateSale() {
 				required
 			/>
 
-			{paymentType === "pix" && (
-				<Input
-					{...register("payment.pixCode")}
-					label="Código pix"
-					type="text"
-					required
-				/>
-			)}
-
 			{paymentType === "card" && (
 				<>
 					<Input
@@ -294,15 +282,6 @@ export default function CreateSale() {
 						required
 					/>
 				</>
-			)}
-
-			{paymentType === "receipt" && (
-				<Input
-					{...register("payment.number")}
-					label="Número"
-					type="text"
-					required
-				/>
 			)}
 
 			<h2>Jogos da venda</h2>
